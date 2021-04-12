@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="312dp"
+        android:layout_height="301dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_sportives_titans_v2" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_email"
+        android:layout_width="345dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/text_input"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="@dimen/text_input_padding"
+        android:paddingLeft="@dimen/text_input_padding"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textColorHint="@color/grey_hint"
+        android:textSize="16sp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_name"
+        android:layout_width="345dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/text_input"
+
+        android:hint="@string/name"
+        android:inputType="textEmailAddress"
+        android:paddingStart="@dimen/text_input_padding"
+        android:paddingLeft="@dimen/text_input_padding"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textColorHint="@color/grey_hint"
+        android:textSize="16sp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPassword"
+        android:layout_width="345dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/text_input"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_name">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/transparent"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/text_input_padding"
+            android:paddingLeft="@dimen/text_input_padding"
+            android:textAllCaps="false"
+            android:textColor="#020202"
+            android:textColorHint="@color/grey_hint"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_name" />
+
+        <ImageView
+            android:id="@+id/btVisiblePassword"
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_visibility_off" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutNewPassWord"
+        android:layout_width="345dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/text_input"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPassword">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_new_password"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@color/transparent"
+            android:hint="@string/repassword"
+            android:inputType="textPassword"
+            android:paddingStart="@dimen/text_input_padding"
+            android:paddingLeft="@dimen/text_input_padding"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textColorHint="@color/grey_hint"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+        <ImageView
+            android:id="@+id/btVisibleNewPassword"
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_visibility_off" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="41dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNewPassWord"
+        app:srcCompat="@drawable/logo_sportives_titans" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginRight="104dp"
+        android:text="@string/registrar"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:backgroundTint="#00FFC5"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

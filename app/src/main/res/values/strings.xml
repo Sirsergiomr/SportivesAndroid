@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SportivesAndroid</string>
+    <string name="repassword">Repita la contraseña</string>
+    <string name="password">Contraseña</string>
+    <string name="registrar">Registrarse</string>
+    <string name="email">Email</string>
+    <string name="name">Nombre</string>
+</resources>
