@@ -1,8 +1,10 @@
 package com.example.sportivesandroid.Requests;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.example.sportivesandroid.LoginActivity;
+import com.example.sportivesandroid.MainActivity;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -31,7 +33,10 @@ public class UserRequests {
                         Preferences.setToken(json.getString(Tags.TOKEN));
                         Preferences.setTipoSesion(json.getString(Tags.TIPO_SESION));
                         Preferences.setNameUser(json.getString(Tags.NAME));
+                        activity.startActivity(new Intent(activity, MainActivity.class));
                         activity.finish();
+                    }else{
+                        ((LoginActivity) activity).enableLogin();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -2,6 +2,8 @@ package com.example.sportivesandroid.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.example.sportivesandroid.MainActivity;
 import com.example.sportivesandroid.Sportives;
 
 public class Preferences {
@@ -107,5 +109,6 @@ public class Preferences {
         setToken(null);
         setTipoSesion("");
         setTipoUser(false);
+        setEmailUser(null);
     }
 }

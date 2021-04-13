@@ -11,4 +11,13 @@
     <string name="empty_name_message">No has puesto el nombre</string>
     <string name="empty_password_message">Tienes que poner dos veces la misma clave</string>
     <string name="password_not_match">Las contraseñas tienen que coincidir</string>
+    <string name="accede">Iniciar sesión</string>
+    <string name="log">Acceder</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="title_activity_a">MainActivity</string>
+    <string name="title_home">Catálogo</string>
+    <string name="title_dashboard">QR</string>
+    <string name="title_notifications">Usuario</string>
+    <string name="exit">Salir</string>
+    <string name="registrar_aqui">Registrate aquí</string>
 </resources>

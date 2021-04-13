@@ -1,8 +1,10 @@
 package com.example.sportivesandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
         bt_show_newpassword = findViewById(R.id.btVisibleNewPassword);
 
         tv_login = findViewById(R.id.tv_login);
+
+        tv_login.setOnClickListener(v -> {
+            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        });
 
         bt_show_password.setOnClickListener(v -> {
             showPassword(v);

@@ -9,7 +9,7 @@ public class Tags {
             LASTNAME = "apellidos",
             PHONE = "telefono",
             PHOTO = "foto",
-            NAME = "name",
+            NAME = "nombre",
             EMAIL ="email",
             DESCRIPTION = "description",
             OSREGISTRATION = "os_registration",
