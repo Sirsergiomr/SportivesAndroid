@@ -10,4 +10,6 @@
     <color name="textInputcolor">#e1e1e1</color>
     <color name="transparent">#004A736F</color>
     <color name="grey_hint">#A1A1A1</color>
+    <color name="text_color">#33917C</color>
+    <color name="link_color">#3B7EED</color>
 </resources>

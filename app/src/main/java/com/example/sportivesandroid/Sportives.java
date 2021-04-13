@@ -9,8 +9,6 @@ import android.content.Context;
 
 public class Sportives extends Application {
 
-
-
         private static Context context;
 
         @Override

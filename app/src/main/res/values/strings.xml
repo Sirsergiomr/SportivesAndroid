@@ -5,4 +5,10 @@
     <string name="registrar">Registrarse</string>
     <string name="email">Email</string>
     <string name="name">Nombre</string>
+    <string name="tienes_cuenta">¿Tienes cuenta?</string>
+    <string name="inicia_sesion">Inicia sesión</string>
+    <string name="empty_email_message">Falta por poner el correo</string>
+    <string name="empty_name_message">No has puesto el nombre</string>
+    <string name="empty_password_message">Tienes que poner dos veces la misma clave</string>
+    <string name="password_not_match">Las contraseñas tienen que coincidir</string>
 </resources>
