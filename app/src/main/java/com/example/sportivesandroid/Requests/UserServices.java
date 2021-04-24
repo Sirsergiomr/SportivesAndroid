@@ -25,4 +25,7 @@ public interface UserServices {
     @FormUrlEncoded
     Call<String> loginGoogle(@Field("data") JSONObject data);
 
+    @POST("/api/v1/usuarios/cambiar_pass/")
+    @FormUrlEncoded
+    Call<String> cambiarPass(@Field("data") JSONObject data);
 }

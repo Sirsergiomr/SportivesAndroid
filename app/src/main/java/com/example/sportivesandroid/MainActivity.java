@@ -2,17 +2,22 @@ package com.example.sportivesandroid;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.sportivesandroid.Utils.Preferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOGIN_REQUEST_CODE = 0027;
     private boolean  loginActivo = false;
     private boolean  comingFromLogin = false;
-
+    public FloatingActionButton bt_floating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Preferences.getToken() == null && !loginActivo) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         // Passing each menu ID as a set of Ids because each

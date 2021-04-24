@@ -78,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btVisiblePassword:
-
                 if(et_password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
                     bt_show_password.setImageResource(R.drawable.ic_remove_red_eye);
                     et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
@@ -151,5 +150,4 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
 }

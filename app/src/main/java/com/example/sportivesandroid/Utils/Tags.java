@@ -2,6 +2,8 @@ package com.example.sportivesandroid.Utils;
 
 public class Tags {
 
+    public static final String NUEVA ="nueva" ;
+    public static final String ANTIGUA ="antigua" ;
     public static String SERVIDOR = "http://192.168.1.45:8000/";
     public static String MEDIA = SERVIDOR +"static/media/";
     public static String USER = "usuario",

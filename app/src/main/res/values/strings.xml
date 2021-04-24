@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SportivesAndroid</string>
+    <string name="app_name">Sportive Titans</string>
     <string name="repassword">Repita la contraseña</string>
     <string name="password">Contraseña</string>
     <string name="registrar">Registrarse</string>
@@ -17,7 +17,25 @@
     <string name="title_activity_a">MainActivity</string>
     <string name="title_home">Catálogo</string>
     <string name="title_dashboard">QR</string>
-    <string name="title_notifications">Usuario</string>
+    <string name="title_notifications">Perfil</string>
     <string name="exit">Salir</string>
     <string name="registrar_aqui">Registrate aquí</string>
+    <string name="cambiar_pasword">Cambiar Password</string>
+    <string name="aqui_card">¡Añade tu tarjeta aquí!</string>
+    <string name="tarjeta">Tarjeta</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="new_password">Nueva contraseña</string>
+    <string name="current_password">Contraseña Actual</string>
+    <string name="faltancampos">Faltan campos</string>
+    <string name="equalserrorpassword">La nueva contraseña no puede ser la misma que la actual</string>
+    <string name="successful_change_password">Contraseña cambiada con éxito</string>
+    <string name="error_password_message">Error al cambiar la contraseña</string>
+    <string name="usuario">Usuario</string>
+    <string name="settings">Ajustes</string>
+    <string name="servicios_contratados">Servicios Contratados</string>
+    <string name="QR">QR</string>
+    <string name="tu_actividad">Tu actividad</string>
+    <string name="tv_escaner">Escaneando</string>
 </resources>

@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
+                textView.setTextColor(getResources().getColor(R.color.black));
             }
         });
         return root;

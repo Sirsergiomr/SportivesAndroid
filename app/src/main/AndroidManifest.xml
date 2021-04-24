@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sportivesandroid">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -26,6 +27,9 @@
         </activity>
         <activity android:name=".MainActivity"
             android:theme="@style/DefaultTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LectorActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".RegisterActivity"

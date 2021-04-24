@@ -15,7 +15,17 @@ public class ApiUtils {
         String message = "Error de conexión";
         Toast.makeText(Sportives.getContext(), message, Toast.LENGTH_LONG).show();
     }
-
+    public static JSONObject getAuthenticationWhith(JSONObject json){
+        JSONObject data = getBasicAuthentication();
+        try {
+            for(int i=0;i<json.names().length();i++){
+                data.put(json.names().get(i).toString(),json.get(json.names().get(i).toString()));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
     public static JSONObject getBasicAuthentication(){
         JSONObject data = new JSONObject();
         try {
