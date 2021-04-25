@@ -28,4 +28,7 @@ public interface UserServices {
     @POST("/api/v1/usuarios/cambiar_pass/")
     @FormUrlEncoded
     Call<String> cambiarPass(@Field("data") JSONObject data);
+    @POST("/api/v1/usuarios/get_maquina/")
+    @FormUrlEncoded
+    Call<String> get_maquina(@Field("data") JSONObject data);
 }

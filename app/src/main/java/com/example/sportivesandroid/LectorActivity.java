@@ -15,16 +15,29 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.sportivesandroid.Requests.ApiUtils;
+import com.example.sportivesandroid.Requests.RetrofitClient;
+import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Utils.Preferences;
+import com.example.sportivesandroid.Utils.Tags;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LectorActivity extends AppCompatActivity {
     CameraSource cameraSource;
@@ -110,7 +123,7 @@ public class LectorActivity extends AppCompatActivity {
                     if (!value.equals("0")) {
                         seguir = false;
                         System.out.println("Leido, "+value);
-//                        checkQr();
+                        comprueba_maquina(value);
                     }
                 }
             }
@@ -148,6 +161,45 @@ public class LectorActivity extends AppCompatActivity {
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
                 cameraSource.stop();
+            }
+        });
+    }
+
+    public void comprueba_maquina(String id) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put(Tags.ID_MAQUINA, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                .get_maquina(ApiUtils.getAuthenticationWhith(data));
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    JSONObject json = new JSONObject(response.body());
+                    String result = json.getString(Tags.RESULT);
+                    if (result.contains(Tags.OK)) {
+                        String id = json.getString(Tags.ID_MAQUINA);
+                        String nombre = json.getString(Tags.NOMBRE);
+                        System.out.println("Nombre de la máquina : "+nombre);
+                        System.out.println("Pk de la máquina : "+id);
+
+                    }else{
+                        //intentalo de nuevo dialog Intentar de nuvo-> iniciarQrDetector();
+                        Toast.makeText(LectorActivity.this,"Try again",Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
             }
         });
     }
