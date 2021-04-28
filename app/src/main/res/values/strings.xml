@@ -38,4 +38,7 @@
     <string name="QR">QR</string>
     <string name="tu_actividad">Tu actividad</string>
     <string name="tv_escaner">Escaneando</string>
+    <string name="title_dialog">titulo</string>
+    <string name="message">Mensaje</string>
+    <string name="accept">Aceptar</string>
 </resources>

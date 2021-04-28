@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -116,6 +117,8 @@ public class LectorActivity extends AppCompatActivity {
 
                     try {
                         value = qrcodes.valueAt(0).rawValue;
+
+
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("No se ha encontrado ningún código.");
                     }
@@ -187,6 +190,11 @@ public class LectorActivity extends AppCompatActivity {
                         String nombre = json.getString(Tags.NOMBRE);
                         System.out.println("Nombre de la máquina : "+nombre);
                         System.out.println("Pk de la máquina : "+id);
+
+                        Intent temporizador = new Intent(LectorActivity.this, TemporizadorActivity.class);
+                        temporizador.putExtra("nombre_actividad",nombre);
+                        temporizador.putExtra("id_maquina",id);
+                        startActivity(temporizador);
 
                     }else{
                         //intentalo de nuevo dialog Intentar de nuvo-> iniciarQrDetector();

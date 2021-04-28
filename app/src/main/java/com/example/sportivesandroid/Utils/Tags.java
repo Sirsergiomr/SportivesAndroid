@@ -6,7 +6,12 @@ public class Tags {
     public static final String ANTIGUA ="antigua" ;
     public static final String ID_MAQUINA ="id_maquina" ;
     public static final String NOMBRE = "nombre";
-    public static String SERVIDOR = "http://192.168.1.45:8000/";
+    public static final String NOMBRE_MAQUINA = "nombre_maquina";
+    public static final String FECHA = "fecha";
+    public static final String HORA = "hora";
+    public static final String TIEMPO_USO = "tiempo_uso";
+    public static final String LISTA = "lista";
+    public static String SERVIDOR = "http://192.168.1.45:8090/";
     public static String MEDIA = SERVIDOR +"static/media/";
     public static String USER = "usuario",
             USERNAME = "username",

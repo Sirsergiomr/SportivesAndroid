@@ -31,4 +31,16 @@ public interface UserServices {
     @POST("/api/v1/usuarios/get_maquina/")
     @FormUrlEncoded
     Call<String> get_maquina(@Field("data") JSONObject data);
+
+    @POST("/api/v1/usuarios/registrar_entrenamiento/")
+    @FormUrlEncoded
+    Call<String> registrar_entrenamiento(@Field("data") JSONObject data);
+
+    @POST("/api/v1/usuarios/get_actividades/")
+    @FormUrlEncoded
+    Call<String> get_actividades(@Field("data") JSONObject data);
+
+    @POST("/api/v1/usuarios/get_entrenamientos/")
+    @FormUrlEncoded
+    Call<String> get_entrenamientos(@Field("data") JSONObject data);
 }
