@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="56dp"
-        android:layout_height="68dp"
+        android:layout_width="57dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:text="Nombre de la actividad"
-        android:textColor="@color/AppThemeBaseColor"
+        android:textColor="@android:color/holo_orange_dark"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -35,18 +35,21 @@
         android:id="@+id/tv_fecha_actividad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:text="00/00/00"
-        android:textColor="@android:color/holo_orange_light"
+        android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintBottom_toBottomOf="@+id/tv_actividad"
         app:layout_constraintStart_toEndOf="@+id/tv_actividad"
-        app:layout_constraintTop_toTopOf="@+id/tv_actividad" />
+        app:layout_constraintTop_toTopOf="@+id/tv_actividad"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="61dp"
-        android:layout_height="63dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_fecha_actividad"
-        app:layout_constraintStart_toEndOf="@+id/tv_fecha_actividad"
-        app:layout_constraintTop_toTopOf="@+id/tv_fecha_actividad"
-        app:srcCompat="@drawable/cosa_rara_naranja" />
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_delete" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

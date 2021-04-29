@@ -3,16 +3,20 @@ package com.example.sportivesandroid;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sportivesandroid.Utils.Preferences;
@@ -30,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int LOGIN_REQUEST_CODE = 0027;
     private boolean  loginActivo = false;
     private boolean  comingFromLogin = false;
-    public FloatingActionButton bt_floating;
+    private FloatingActionButton bt_scan;
+    private static final int QR_REQUEST_CODE = 8888;
+    final int RequestCameraPermissionID = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Preferences.getToken() == null && !loginActivo) {
@@ -50,6 +56,24 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        bt_scan = findViewById(R.id.bt_qr);
+
+        bt_scan.setOnClickListener(v -> {
+            cameraPermisions();
+        });
+    }
+    private void cameraPermisions(){
+        int estadoDePermiso = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if (estadoDePermiso == PackageManager.PERMISSION_GRANTED){
+            startActivityForResult(new Intent(this, LectorActivity.class),QR_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
+            System.out.println("PERMISOS");
+
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

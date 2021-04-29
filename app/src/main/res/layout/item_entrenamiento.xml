@@ -5,7 +5,7 @@
     android:id="@+id/entrenamiento_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_orange_dark">
+    android:background="@color/AppThemeBaseColor">
 
     <View
         android:id="@+id/divider4"
@@ -21,48 +21,39 @@
         android:id="@+id/tv_entrenamiento"
         android:layout_width="145dp"
         android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="Nombre del entrenamiento"
-        android:textColor="@color/backgroud"
+        android:textColor="@android:color/holo_orange_dark"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tv_fecha_entrenamiento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="00/00/00"
-        android:textColor="@color/backgroud"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_hora_entrenamiento" />
 
     <TextView
         android:id="@+id/tv_hora_entrenamiento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:text="00:00:00"
-        android:textColor="@color/backgroud"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="61dp"
-        android:layout_height="63dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_fecha_entrenamiento"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cosa_rara_azul" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_total_tiempo"
@@ -70,14 +61,22 @@
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="00:00:00"
-        android:textColor="@color/backgroud"
+        android:textColor="@android:color/holo_orange_dark"
         android:textSize="24sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/tv_entrenamiento"
         app:layout_constraintEnd_toStartOf="@+id/tv_fecha_entrenamiento"
-        app:layout_constraintStart_toEndOf="@+id/tv_entrenamiento"
-        app:layout_constraintTop_toTopOf="@+id/tv_entrenamiento" />
+        app:layout_constraintStart_toEndOf="@+id/tv_entrenamiento" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="23dp"
+        android:layout_height="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_entrenamiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_entrenamiento"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,10 +37,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class qrFragment extends Fragment {
-    private static final int QR_REQUEST_CODE = 8888;
-    final int RequestCameraPermissionID = 1001;
+
     private qrviewmodel dashboardViewModel;
-    private Button bt_scan;
+
     private JSONArray lista = new JSONArray();
     private Adapter_Actividades adapter;
     private RecyclerView recyclerView;
@@ -57,11 +56,6 @@ public class qrFragment extends Fragment {
             }
         });
 
-        bt_scan = root.findViewById(R.id.bt_qr);
-
-        bt_scan.setOnClickListener(v -> {
-            cameraPermisions();
-        });
         recyclerView = root.findViewById(R.id.recycler_view_actividades);
 
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
@@ -99,15 +93,5 @@ public class qrFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    private void cameraPermisions(){
-        int estadoDePermiso = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
-        if (estadoDePermiso == PackageManager.PERMISSION_GRANTED){
-            startActivityForResult(new Intent(getContext(), LectorActivity.class),QR_REQUEST_CODE);
-        } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
-            System.out.println("PERMISOS");
 
-        }
-    }
 }

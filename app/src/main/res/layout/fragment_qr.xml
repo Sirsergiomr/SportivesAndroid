@@ -7,17 +7,6 @@
     android:background="@color/backgroud"
     tools:context=".ui.qr.qrFragment">
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/AppThemeBaseColorDifuminado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_qr" />
-
     <TextView
         android:id="@+id/text_dashboard"
         android:layout_width="match_parent"
@@ -31,97 +20,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bt_qr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/borderbackground_apptheme"
-        android:text="@string/QR"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/tu_actividad"
-        android:textColor="@color/AppThemeBaseColor"
+        android:textColor="@color/link_color"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/esquina_1"
-        app:layout_constraintEnd_toStartOf="@+id/bt_qr"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/esquina_1"
-        app:layout_constraintEnd_toStartOf="@+id/bt_qr"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
-        android:src="@drawable/esquina_1"
-        app:layout_constraintStart_toEndOf="@+id/bt_qr"
-        app:layout_constraintTop_toBottomOf="@+id/bt_qr" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="15dp"
-        android:layout_height="11dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/esquina_2"
-        app:layout_constraintStart_toEndOf="@+id/bt_qr"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="12dp"
-        android:layout_height="13dp"
-        android:src="@drawable/esquina_3"
-        app:layout_constraintEnd_toStartOf="@+id/bt_qr"
-        app:layout_constraintTop_toBottomOf="@+id/bt_qr" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="146dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:src="@drawable/banner_1"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="145dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="1dp"
-        android:src="@drawable/banner_2"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
