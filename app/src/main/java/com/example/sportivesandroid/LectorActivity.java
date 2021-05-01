@@ -67,6 +67,7 @@ public class LectorActivity extends AppCompatActivity {
             }
         });
     }
+
     private AlertDialog cargando() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -195,7 +196,7 @@ public class LectorActivity extends AppCompatActivity {
                         temporizador.putExtra("nombre_actividad",nombre);
                         temporizador.putExtra("id_maquina",id);
                         startActivity(temporizador);
-
+                        finish();
                     }else{
                         //intentalo de nuevo dialog Intentar de nuvo-> iniciarQrDetector();
                         Toast.makeText(LectorActivity.this,"Try again",Toast.LENGTH_LONG).show();
@@ -211,4 +212,7 @@ public class LectorActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() { finish();}
 }

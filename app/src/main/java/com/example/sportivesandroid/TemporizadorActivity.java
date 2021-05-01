@@ -112,11 +112,6 @@ public class TemporizadorActivity extends AppCompatActivity {
         System.out.println("Hora de creación del entrenamiento " + hora);
         System.out.println("Fecha de creación: "+formattedDate);
 
-        //todo Con estos datos se crea un entrenamieto, desde el metodo crear entrenamieto del servidor hacer
-        // que vea si existe una actividad con la misma fecha de creación(sin hora)
-        // sino la hay entonces crea una actividad nueva, y si no simplemente
-        // crea otro entrenamiento con los datos anteriormente mencionados.
-
         JSONObject data = new JSONObject();
 
         try {
@@ -155,5 +150,12 @@ public class TemporizadorActivity extends AppCompatActivity {
             }
         });
         dialog.dismiss();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent back = new Intent(TemporizadorActivity.this, LectorActivity.class);
+        startActivity(back);
     }
 }
