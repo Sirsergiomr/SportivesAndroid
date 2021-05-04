@@ -2,6 +2,7 @@ package com.example.sportivesandroid.Utils;
 
 public class Tags {
 
+    public static final String ONESIGNAL_APP_ID = "ad1d7216-f430-4929-a719-2c31195e798a";
     public static final String NUEVA ="nueva" ;
     public static final String ANTIGUA ="antigua" ;
     public static final String ID_MAQUINA ="id_maquina" ;

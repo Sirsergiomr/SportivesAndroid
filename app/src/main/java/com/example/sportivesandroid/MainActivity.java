@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sportivesandroid.Utils.Preferences;
+import com.example.sportivesandroid.Utils.Tags;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onesignal.OneSignal;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton bt_scan;
     private static final int QR_REQUEST_CODE = 8888;
     final int RequestCameraPermissionID = 1001;
-    private static final String ONESIGNAL_APP_ID = "ad1d7216-f430-4929-a719-2c31195e798a";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Preferences.getToken() == null && !loginActivo) {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
      OneSignal. setLogLevel(OneSignal. LOG_LEVEL. VERBOSE, OneSignal. LOG_LEVEL. NONE);
-     OneSignal. initWithContext(this);  OneSignal. setAppId(ONESIGNAL_APP_ID);
+     OneSignal. initWithContext(this);  OneSignal. setAppId(Tags.ONESIGNAL_APP_ID);
 
     }
     private void cameraPermisions(){
