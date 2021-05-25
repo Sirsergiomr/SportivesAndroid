@@ -2,14 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_oferta"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/transparent"
+    android:background="@drawable/borderbackground_iv"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="409dp"
-        android:layout_height="132dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:cardBackgroundColor="@color/backgroud"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,65 +20,148 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="186dp"
-                android:layout_height="0dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp"
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_oferta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#8C9EFF"
-                    app:srcCompat="@drawable/logo_sportives_titans_3" />
-            </androidx.cardview.widget.CardView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_oferta"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:civ_border_color="@android:color/holo_orange_dark"
+                app:civ_border_width="5dp"
+                app:civ_circle_background_color="@android:color/holo_orange_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_descripción_oferta"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo_sportives_titans_3"
+                tools:srcCompat="@drawable/logo_sportives_titans_3" />
 
             <TextView
                 android:id="@+id/tv_name_oferta"
-                android:layout_width="wrap_content"
+                android:layout_width="189dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Nombre del anuncio :D Xdddd"
-                android:textColor="#FF9E80"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_name_oferta2"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Nombre del anuncio :D Xdddd"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_oferta"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_descripción_oferta"
-                android:layout_width="175dp"
-                android:layout_height="54dp"
+                android:layout_width="0dp"
+                android:layout_height="83dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:text="DescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripci"
-                android:textColor="#8AEDED"
+                android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_oferta"
+                app:layout_constraintEnd_toStartOf="@+id/iv_oferta"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_oferta"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_descripción_oferta2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="DescripciónDescripciónDescripciónDescripciónDescripciónDescripciónDescripci"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/bt_contratar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_name_oferta"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name_oferta" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_oferta2"
+                tools:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_precio_oferta"
-                android:layout_width="119dp"
-                android:layout_height="17dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginBottom="9dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="20dp"
                 android:text="PRECIO € rublos"
-                android:textColor="#FF9E80"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textStyle="bold"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tv_descripción_oferta"
-                app:layout_constraintTop_toBottomOf="@+id/tv_descripción_oferta" />
+                app:layout_constraintStart_toStartOf="@+id/tv_name_oferta"
+                app:layout_constraintTop_toBottomOf="@+id/tv_descripción_oferta2" />
+
+            <TextView
+                android:id="@+id/tv_euro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:gravity="center_vertical"
+                android:text="€"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_precio_oferta"
+                app:layout_constraintStart_toEndOf="@+id/tv_precio_oferta" />
+
+            <Button
+                android:id="@+id/bt_contratar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/backgroud"
+                android:text="Contratar"
+                android:textColor="#26FF00"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_euro"
+                app:layout_constraintTop_toBottomOf="@+id/tv_descripción_oferta2"
+                tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

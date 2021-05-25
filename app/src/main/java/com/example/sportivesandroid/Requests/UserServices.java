@@ -13,10 +13,6 @@ public interface UserServices {
     @FormUrlEncoded
     Call<String> login(@Field("data") JSONObject data);
 
-    @POST("api/v1/usuarios/get_inicio/")
-    @FormUrlEncoded
-    Call<String> loadUser(@Field("data") JSONObject data);
-
     @POST("api/v1/usuarios/registrar-usuario/")
     @FormUrlEncoded
     Call<String> register(@Field("data") JSONObject data);
@@ -43,4 +39,23 @@ public interface UserServices {
     @POST("/api/v1/usuarios/get_entrenamientos/")
     @FormUrlEncoded
     Call<String> get_entrenamientos(@Field("data") JSONObject data);
+
+    @POST("/api/v1/usuarios/get_anuncios/")
+    @FormUrlEncoded
+    Call<String> get_anuncios(@Field("data") JSONObject data);
+
+    @POST("/api/v1/usuarios/eraser_cards/")
+    @FormUrlEncoded
+    Call<String> eraser_cards(@Field("data") JSONObject data);
+
+    @POST("api/v1/usuarios/get_tarjetas/")
+    @FormUrlEncoded
+    Call<String> get_tarjetas(@Field("data") JSONObject data);
+
+    @POST("api/v1/usuarios/get_contratados/")
+    @FormUrlEncoded
+    Call<String> get_contratados(@Field("data") JSONObject data);
+    @POST("api/v1/usuarios/hacer_pago/")
+    @FormUrlEncoded
+    Call<String> hacer_pago(@Field("data") JSONObject data);
 }

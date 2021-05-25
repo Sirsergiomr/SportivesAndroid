@@ -67,7 +67,7 @@ public class qrFragment extends Fragment {
                     JSONObject json = new JSONObject(response.body());
                     String result = json.getString(Tags.RESULT);
                     if (result.contains(Tags.OK)) {
-                           lista =   json.getJSONArray(Tags.LISTA);
+                        lista =   json.getJSONArray(Tags.LISTA);
                         System.out.println("Lista = "+lista+"---------------------");
                         lista_actividades();
                     }else{

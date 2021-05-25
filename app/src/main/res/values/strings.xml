@@ -41,4 +41,9 @@
     <string name="title_dialog">titulo</string>
     <string name="message">Mensaje</string>
     <string name="accept">Aceptar</string>
+    <string name="no_visa">No hay niguna tarjeta registrada</string>
+    <string name="no_seguro_message">Estas intentando acceder a un sitio web no seguro, por motivos de seguridad no podemos redirigirte a esta página.</string>
+    <string name="seguir_navegando">Seguir navegando</string>
+    <string name="sitio_no_seguro">Sitio no seguro</string>
+    <string name="precio_min">El precio minimo es de 1€</string>
 </resources>

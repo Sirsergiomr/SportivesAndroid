@@ -3,8 +3,8 @@ package com.example.sportivesandroid;
 import android.app.Application;
 import android.content.Context;
 
-//import com.example.sportivesandroid.Utils.Tags;
-//import com.stripe.android.PaymentConfiguration;
+import com.example.sportivesandroid.Utils.Tags;
+import com.stripe.android.PaymentConfiguration;
 
 
 public class Sportives extends Application {
@@ -13,8 +13,8 @@ public class Sportives extends Application {
 
         @Override
         public void onCreate() {
-//todo Hacer esto mas tarde para los pagos con tarjeta mediante stripe
-//            PaymentConfiguration.init(Tags.STRIPE_PUBLIC_KEY);
+
+            PaymentConfiguration.init(Tags.STRIPE_PUBLIC_KEY);
 
             super.onCreate();
             context = this;

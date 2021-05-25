@@ -40,20 +40,15 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
         @Override
         public void onBindViewHolder(@NonNull com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder holder, int position) {
             try {
-
                 JSONObject entrada = (JSONObject) lista.get(position);
                 String fecha = entrada.getString(Tags.FECHA);
                 holder.tv_nombre.setText(entrada.getString(Tags.NOMBRE));
                 holder.tv_fecha.setText(fecha);
                 holder.layout_item.setOnClickListener(v -> {
-                    //todo, pasar a una nueva actividad que contenga un recycler para los entrenamientos
-
                     System.out.println("Entrenamientos de día "+fecha);
-
                     Intent entrenamientos = new Intent(context, Entrenamientos.class);
                     entrenamientos.putExtra("fecha",fecha);
                     context.startActivity(entrenamientos);
-
                 });
             } catch (JSONException e) {
                 e.printStackTrace();

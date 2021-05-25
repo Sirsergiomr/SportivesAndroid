@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton bt_scan;
     private static final int QR_REQUEST_CODE = 8888;
     final int RequestCameraPermissionID = 1001;
-
+    private final static int WEB_VIEW_REQUEST = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Preferences.getToken() == null && !loginActivo) {
@@ -88,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == LOGIN_REQUEST_CODE){
             loginActivo = false;
             comingFromLogin = true;
+        }else if (requestCode == WEB_VIEW_REQUEST) {
+            System.out.println("Comprobando activityresult 123");
+            Functions.refreshFragment(getSupportFragmentManager());
+            if (resultCode == 0) {
+
+            }else if (resultCode == 3333){
+                System.out.println("Comprobando activityresult 3333");
+                Preferences.clearUserPreferences();
+            }
         }
     }
     public void ComprobarLogin(){

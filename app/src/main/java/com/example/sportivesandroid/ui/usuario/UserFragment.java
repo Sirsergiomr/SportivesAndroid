@@ -1,11 +1,15 @@
 package com.example.sportivesandroid.ui.usuario;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,20 +26,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sportivesandroid.Adapters.Adapter_Anuncios;
+import com.example.sportivesandroid.Adapters.Adapter_servicios_contratados;
 import com.example.sportivesandroid.MainActivity;
+import com.example.sportivesandroid.Models.Tarjeta;
+import com.example.sportivesandroid.Models.User;
 import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserRequests;
 import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Sportives;
+import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,10 +62,14 @@ public class UserFragment extends Fragment {
 
     private UserViewModel notificationsViewModel;
     private Button bt_exit, bt_change_password;
-    private TextView tv_name, tv_email;
+    private TextView tv_name, tv_email, tv_tarjeta;
     EditText et_pass_actual,et_pass_nueva,et_repass_nueva;
-    private ImageView btActualPassword, btNewPassword, btReNewPassord, bt_card;
-
+    private ImageView btActualPassword, btNewPassword, btReNewPassord,bt_add_card;
+    private ArrayList<Tarjeta> tarjetas;
+    private final static int WEB_VIEW_REQUEST = 123;
+    Adapter_servicios_contratados adapter;
+    RecyclerView recyclerView;
+    JSONArray lista;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -71,19 +92,56 @@ public class UserFragment extends Fragment {
         et_pass_actual  = root.findViewById(R.id.et_check_password);
         et_pass_nueva = root.findViewById(R.id.et_new_password_dialog);
         et_repass_nueva = root.findViewById(R.id.et_renew_password_dialog);
+        tv_tarjeta = root.findViewById(R.id.tv_tarjeta);
+        bt_add_card = root.findViewById(R.id.bt_add_card);
+        recyclerView = root.findViewById(R.id.recycler_servicios);
 
+        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                .get_contratados(ApiUtils.getBasicAuthentication());
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    JSONObject json = new JSONObject(response.body());
+                    String result = json.getString(Tags.RESULT);
+                    if (result.contains(Tags.OK)) {
+                        lista =   json.getJSONArray(Tags.LISTA);
+                        System.out.println("Lista servicios = "+lista+"---------------------");
+                        lista_contrartados();
+                    }else{
+                        Toast.makeText(getContext(),"Tenemos un problema en los servicios del Usuario",Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return root;
+    }
+    public void lista_contrartados(){
+        adapter = new Adapter_servicios_contratados(getContext(), lista);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         if(Preferences.getEmailUser() != null && !Preferences.getEmailUser().equals("")){
             tv_name.setText(Preferences.getNameUser());
             tv_email.setText(Preferences.getEmailUser());
         }
 
-        return root;
-    }
+        getTarjetas();
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        setCard();
 
         bt_exit.setOnClickListener(v -> {
             Preferences.clearUserPreferences();
@@ -92,7 +150,26 @@ public class UserFragment extends Fragment {
         bt_change_password.setOnClickListener(v -> {
             DialogChangePassword(getContext());
         });
+        bt_add_card.setOnClickListener(v -> {
+            if(Preferences.getString(Tags.TARJETA) != null && !Preferences.getString(Tags.TARJETA).equals("")){
+                dialogCreateCard();
+            }else{
+                Functions.crearTarjeta(getActivity(), WEB_VIEW_REQUEST);
+                getTarjetas();
+            }
+        });
     }
+
+
+    public void setCard(){
+        if(Preferences.getString(Tags.TARJETA) != null && !Preferences.getString(Tags.TARJETA).equals("")){
+            bt_add_card.setImageResource(R.drawable.ic_refresh);
+        }else{
+            bt_add_card.setImageResource(R.drawable.ic_add_box);
+            tv_tarjeta.setText(R.string.aqui_card);
+        }
+    }
+
     public void showPassword(View view){
         switch (view.getId()){
             case R.id.btVisibleConfirmPassword:
@@ -125,6 +202,11 @@ public class UserFragment extends Fragment {
                 }
                 break;
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        tarjetas = new ArrayList<>();
     }
 
     public void closeSoftKeyBoard(View view) {
@@ -241,5 +323,97 @@ public class UserFragment extends Fragment {
         });
     }
 
+    private void dialogCreateCard(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("¡¡Cuidado!!");
+        builder.setMessage("Si vas a cambiar la tarjeta, la anterior será quitada del sistema.");
+
+        builder.setPositiveButton("Añadir nueva tarjeta", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                eraser_cards();
+                Functions.crearTarjeta(getActivity(), WEB_VIEW_REQUEST);
+                getTarjetas();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    private void eraser_cards(){
+        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                .eraser_cards(ApiUtils.getBasicAuthentication());
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    JSONObject json = new JSONObject(response.body());
+                    String result;
+                    result = json.getString(Tags.RESULT);
+                    if (result.contains(Tags.OK)) {
+                        Log.v("PerfilActivity", "Borrado de tarjetas exitoso");
+                        Preferences.setString(Tags.TARJETA,null);
+                        Functions.refreshFragment(getParentFragmentManager());
+                    }else{
+                        Log.v("PerfilActivity", "Error en borrado de tarjetas");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {}
+        });
+    }
+
+    public void getTarjetas(){
+        new Thread() {
+            @Override
+            public void run() {
+                Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                        .get_tarjetas(ApiUtils.getBasicAuthentication());
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        System.out.println("Comprobar tarjertas");
+                        try {
+                            JSONObject json = new JSONObject(response.body());
+                            String result;
+                            result = json.getString(Tags.RESULT);
+                            if (result.contains(Tags.OK)) {
+
+                                JSONArray array = json.getJSONArray(Tags.LISTA);
+                                System.out.println("Comprobar entrada de get_tarjetas "+  array.getJSONObject(array.length()-1).toString());
+                                Log.v("PerfilActivity", array.getJSONObject(array.length()-1).toString());
+                                Tarjeta t = new Tarjeta(array.getJSONObject(array.length()-1));
+
+                                Preferences.setString(Tags.TARJETA,t.getEnd_digits());
+
+                                tv_tarjeta.setText("**** **** **** "+t.getEnd_digits());
+
+                                Log.v("PerfilActivity", "total pistas " + tarjetas.size());
+                            }else if(result.contains(Tags.NO_VISA)){
+                                Toast.makeText(Sportives.getContext(), R.string.no_visa,Toast.LENGTH_LONG).show();
+                            }else{
+                                System.out.println("Error get_tarjetas " + json.get(Tags.MESSAGE));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {}
+                });
+            }
+        }.start();
+    }
 
 }

@@ -19,5 +19,5 @@
     <color name="AppThemeBaseColor">@color/dark_grey</color>
     <color name="AppThemeBaseColorDifuminado">#6F1EEAD2</color>
     <color name="backgroud">#333333</color>
-
+    <color name="orangebelike"></color>
 </resources>
