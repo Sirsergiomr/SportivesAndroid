@@ -126,7 +126,7 @@ public class UserFragment extends Fragment {
     }
     public void lista_contrartados(){
         adapter = new Adapter_servicios_contratados(getContext(), lista);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
 
     }

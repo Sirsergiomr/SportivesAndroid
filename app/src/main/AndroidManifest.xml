@@ -54,6 +54,10 @@
             android:name=".WebViewActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".NoConectionActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

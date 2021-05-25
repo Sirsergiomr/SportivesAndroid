@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.example.sportivesandroid.LoginActivity;
 import com.example.sportivesandroid.MainActivity;
+import com.example.sportivesandroid.NoConectionActivity;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -46,7 +47,10 @@ public class UserRequests {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 ApiUtils.ErrorResponse(t);
-                activity.finish();
+                ((LoginActivity) activity).enableLogin();
+                Intent intent = new Intent(activity, NoConectionActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
             }
         });
     }
