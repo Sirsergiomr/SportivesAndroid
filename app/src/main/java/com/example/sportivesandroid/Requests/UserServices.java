@@ -58,4 +58,7 @@ public interface UserServices {
     @POST("api/v1/usuarios/hacer_pago/")
     @FormUrlEncoded
     Call<String> hacer_pago(@Field("data") JSONObject data);
+    @POST("api/v1/usuarios/comprobar_conexion/")
+    @FormUrlEncoded
+    Call<String> comprobar_conexion(@Field("data") JSONObject data);
 }

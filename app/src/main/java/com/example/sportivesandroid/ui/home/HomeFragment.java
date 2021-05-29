@@ -21,6 +21,7 @@ import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -52,34 +53,41 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        anuncios();
 
         recyclerView = root.findViewById(R.id.recycler_anuncios);
-        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
-                .get_anuncios(ApiUtils.getBasicAuthentication());
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    JSONObject json = new JSONObject(response.body());
-                    String result = json.getString(Tags.RESULT);
-                    if (result.contains(Tags.OK)) {
-                        lista =   json.getJSONArray(Tags.LISTA);
-                        System.out.println("Lista anuncios = "+lista+"---------------------");
-                        lista_anuncios();
-                    }else{
-                        Toast.makeText(getContext(),"Tenemos un problema en los anuncios",Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
         return root;
+    }
+
+    public void anuncios(){
+        if(!Preferences.getID().equals("-1")){
+            Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                    .get_anuncios(ApiUtils.getBasicAuthentication());
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    try {
+                        JSONObject json = new JSONObject(response.body());
+                        String result = json.getString(Tags.RESULT);
+                        if (result.contains(Tags.OK)) {
+                            lista =   json.getJSONArray(Tags.LISTA);
+                            System.out.println("Lista anuncios = "+lista+"---------------------");
+                            lista_anuncios();
+                        }else{
+                            Toast.makeText(getContext(),"Tenemos un problema en los anuncios",Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     public void lista_anuncios(){
