@@ -43,17 +43,18 @@ public class MainActivity extends AppCompatActivity {
     private boolean  comingFromLogin = false;
 
     private FloatingActionButton bt_scan;
-
     private static final int LOGIN_REQUEST_CODE = 0027;
     private static final int QR_REQUEST_CODE = 8888;
     final int RequestCameraPermissionID = 1001;
     private final static int WEB_VIEW_REQUEST = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        comprobar_conexion();
+
         if (Preferences.getToken() == null && !loginActivo) {
             loginActivo = true;
             startActivityForResult(new Intent(this, LoginActivity.class), LOGIN_REQUEST_CODE);
+        }else{
+            comprobar_conexion();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -75,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
         OneSignal. setLogLevel(OneSignal. LOG_LEVEL. VERBOSE, OneSignal. LOG_LEVEL. NONE);
         OneSignal. initWithContext(this);  OneSignal. setAppId(Tags.ONESIGNAL_APP_ID);
+
+        Sportives.setCurrentActivity(this);
     }
 
+    /**
+     *
+     * */
     private void cameraPermisions(){
         int estadoDePermiso = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED){
@@ -139,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
             loginActivo= true;
             startActivityForResult(new Intent(this, LoginActivity.class), LOGIN_REQUEST_CODE);
             comingFromLogin = false;
-        }else{
-            //Que quieres cargar  al main si el login esta ok
         }
     }
 
@@ -148,6 +152,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ComprobarLogin();
+        comprobar_conexion();
     }
-
 }

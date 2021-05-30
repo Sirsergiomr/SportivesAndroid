@@ -47,6 +47,7 @@ import com.example.sportivesandroid.Sportives;
 import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
+import com.example.sportivesandroid.ui.qr.qrFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,7 +96,11 @@ public class UserFragment extends Fragment {
         tv_tarjeta = root.findViewById(R.id.tv_tarjeta);
         bt_add_card = root.findViewById(R.id.bt_add_card);
         recyclerView = root.findViewById(R.id.recycler_servicios);
+        litaservicios();
+        return root;
+    }
 
+    public void litaservicios(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .get_contratados(ApiUtils.getBasicAuthentication());
 
@@ -122,14 +127,14 @@ public class UserFragment extends Fragment {
 
             }
         });
-        return root;
     }
+
     public void lista_contrartados(){
         adapter = new Adapter_servicios_contratados(getContext(), lista);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
-
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -160,12 +165,11 @@ public class UserFragment extends Fragment {
         });
     }
 
-
     public void setCard(){
         if(Preferences.getString(Tags.TARJETA) != null && !Preferences.getString(Tags.TARJETA).equals("")){
-            bt_add_card.setImageResource(R.drawable.ic_refresh);
+            bt_add_card.setImageResource(R.drawable.cardtem2);
         }else{
-            bt_add_card.setImageResource(R.drawable.ic_add_box);
+            bt_add_card.setImageResource(R.drawable.cardtem1);
             tv_tarjeta.setText(R.string.aqui_card);
         }
     }
@@ -290,6 +294,7 @@ public class UserFragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
     }
+
     public void change_password(String newPassword, String oldPassword) {
         JSONObject data = new JSONObject();
         try {
@@ -347,6 +352,7 @@ public class UserFragment extends Fragment {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     private void eraser_cards(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .eraser_cards(ApiUtils.getBasicAuthentication());
@@ -400,8 +406,10 @@ public class UserFragment extends Fragment {
                                 tv_tarjeta.setText("**** **** **** "+t.getEnd_digits());
 
                                 Log.v("PerfilActivity", "total pistas " + tarjetas.size());
+
+                                setCard();
                             }else if(result.contains(Tags.NO_VISA)){
-                                Toast.makeText(Sportives.getContext(), R.string.no_visa,Toast.LENGTH_LONG).show();
+                                //Toast.makeText(Sportives.getContext(), R.string.no_visa,Toast.LENGTH_LONG).show();
                             }else{
                                 System.out.println("Error get_tarjetas " + json.get(Tags.MESSAGE));
                             }
@@ -415,5 +423,4 @@ public class UserFragment extends Fragment {
             }
         }.start();
     }
-
 }

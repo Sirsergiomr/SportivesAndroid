@@ -19,6 +19,8 @@ import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Sportives;
+import com.example.sportivesandroid.Utils.DialogX;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -104,11 +106,29 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             holder.bt_contratar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (precio*100 <= 0 || precio*100 <100){
-                        Toast.makeText(context, R.string.precio_min, Toast.LENGTH_LONG).show();
-                    }else{
-                        pagar(pk_anuncio,precio*100);
-                    }
+                    DialogX xd = new DialogX(Sportives.getCurrentActivity(),R.layout.dialog_message_title);
+
+                    xd.dialog_confirmacion("Aceptar", "Cancelar",
+                            "¿Realziar Pago?", "La siguiente operación va a realizar un cobro.", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if (precio*100 <= 0 || precio*100 <100){
+                                        Toast.makeText(context, R.string.precio_min, Toast.LENGTH_LONG).show();
+                                    }else{
+                                        pagar(pk_anuncio,precio*100);
+                                    }
+                                }
+                            }, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    xd.dismiss();
+                                }
+                            }, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    xd.dismiss();
+                                }
+                            });
                 }
             });
         } catch (JSONException e) {
@@ -128,8 +148,6 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
                     .fitCenter()
                     .into(holder.imagen);
         }
-
-
 
     }
 

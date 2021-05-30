@@ -6,6 +6,7 @@
         android:width="300dp"
         android:gravity="center">
         <bitmap
-            android:src="@drawable/logo_sportives_titans_3" />
+            android:src="@drawable/ic_add_box"
+            android:tint="@color/orangebelike"/>
     </item>
 </layer-list>

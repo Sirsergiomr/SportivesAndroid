@@ -33,7 +33,7 @@ public class Entrenamientos extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrenamientos);
 
-
+        Sportives.setCurrentActivity(this);
 
         if(getIntent().getExtras()!= null){
             fecha = getIntent().getExtras().getString("fecha");
@@ -41,6 +41,10 @@ public class Entrenamientos extends AppCompatActivity{
 
         rv_entrenamietos = findViewById(R.id.rv_entrenamientos);
 
+        milist();
+    }
+
+    public void milist(){
         JSONObject data = new JSONObject();
 
         try {
@@ -48,7 +52,6 @@ public class Entrenamientos extends AppCompatActivity{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .get_entrenamientos(ApiUtils.getAuthenticationWhith(data));
@@ -77,8 +80,9 @@ public class Entrenamientos extends AppCompatActivity{
         });
     }
 
+
     public void lista_entrenamientos(){
-        adapter = new Adapter_Entrenamientos(Entrenamientos.this, lista);
+        adapter = new Adapter_Entrenamientos(Entrenamientos.this, lista, this);
         rv_entrenamietos.setAdapter(adapter);
         rv_entrenamietos.setLayoutManager(new LinearLayoutManager(Entrenamientos.this));
     }

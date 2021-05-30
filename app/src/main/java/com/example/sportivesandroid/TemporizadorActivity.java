@@ -60,7 +60,11 @@ public class TemporizadorActivity extends AppCompatActivity {
         bt_stop_timer = findViewById(R.id.bt_stop_timer);
         bt_play_timer = findViewById(R.id.bt_play_timer);
         bt_pause_timer = findViewById(R.id.bt_pause_timer);
-
+        if(start_stop ==false){
+            crono.setBase(SystemClock.elapsedRealtime()-timepause);
+            start_stop =true;
+            crono.start();
+        }
         bt_play_timer.setOnClickListener(v -> {
             if(start_stop ==false){
                 crono.setBase(SystemClock.elapsedRealtime()-timepause);
@@ -136,6 +140,7 @@ public class TemporizadorActivity extends AppCompatActivity {
                     String result = json.getString(Tags.RESULT);
                     if (result.contains(Tags.OK)) {
                         Toast.makeText(TemporizadorActivity.this, "Todo ok",Toast.LENGTH_LONG).show();
+                        finish();
                     }else{
                         Toast.makeText(TemporizadorActivity.this, "Todo mal :V",Toast.LENGTH_LONG).show();
                     }

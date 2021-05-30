@@ -26,7 +26,7 @@
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_orange_dark"
+            android:background="@color/orangebelike"
             app:srcCompat="@drawable/logo_sportives_titans_3" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

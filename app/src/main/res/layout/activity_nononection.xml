@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/AppThemeBaseColor">
+    android:background="@color/backgroud">
 
     <TextView
         android:id="@+id/textView13"
@@ -12,7 +12,7 @@
         android:layout_height="29dp"
         android:gravity="center"
         android:text="No hay conexíon con el servidor.."
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="@color/orangebelike"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Vuelve a intentarlo más tarde"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="@color/orangebelike"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

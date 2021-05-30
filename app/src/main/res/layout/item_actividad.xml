@@ -5,7 +5,8 @@
     android:id="@+id/actividad_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroud">
+    android:background="@color/backgroud"
+    android:foregroundTint="@color/orangebelike">
 
     <ImageView
         android:id="@+id/imageView8"
@@ -23,9 +24,8 @@
         android:layout_width="145dp"
         android:layout_height="21dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:text="Nombre de la actividad"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="@color/orangebelike"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -36,20 +36,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
         android:text="00/00/00"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="@color/orangebelike"
         app:layout_constraintBottom_toBottomOf="@+id/tv_actividad"
         app:layout_constraintStart_toEndOf="@+id/tv_actividad"
         app:layout_constraintTop_toTopOf="@+id/tv_actividad"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_delete_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/orangebelike"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:srcCompat="@android:drawable/ic_delete"
+        app:tint="@color/orangebelike" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

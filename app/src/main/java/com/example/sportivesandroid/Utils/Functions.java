@@ -15,7 +15,7 @@ public class Functions {
     public static void refreshFragment(FragmentManager pfm){
         UserFragment frag = new UserFragment();
         FragmentManager fm = pfm;
-        fm.beginTransaction().replace(R.id.container, frag).addToBackStack(null).commit();
+        fm.beginTransaction().replace(R.id.container_usu, frag).addToBackStack(null).commit();
     }
     public static void setDecorView(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

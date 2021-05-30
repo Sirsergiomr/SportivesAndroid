@@ -16,8 +16,8 @@
     <color name="transparent">#004A736F</color>
     <color name="grey_hint">#A1A1A1</color>
     <color name="text_color">#33917C</color>
-    <color name="AppThemeBaseColor">@color/dark_grey</color>
+    <color name="AppThemeBaseColor">#AE484848</color>
     <color name="AppThemeBaseColorDifuminado">#6F1EEAD2</color>
     <color name="backgroud">#333333</color>
-    <color name="orangebelike"></color>
+    <color name="orangebelike">#FFC90E</color>
 </resources>

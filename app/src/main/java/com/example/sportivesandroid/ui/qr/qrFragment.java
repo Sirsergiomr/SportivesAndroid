@@ -1,19 +1,16 @@
 package com.example.sportivesandroid.ui.qr;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportivesandroid.Adapters.Adapter_Actividades;
-import com.example.sportivesandroid.LectorActivity;
 import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
@@ -58,6 +54,12 @@ public class qrFragment extends Fragment {
 
         recyclerView = root.findViewById(R.id.recycler_view_actividades);
 
+        milist();
+
+        return root;
+    }
+
+    public void milist(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .get_actividades(ApiUtils.getBasicAuthentication());
         call.enqueue(new Callback<String>() {
@@ -77,21 +79,20 @@ public class qrFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
+            public void onFailure(Call<String> call, Throwable t) { }
         });
-        return root;
     }
 
-
     public void lista_actividades(){
-        adapter = new Adapter_Actividades(getContext(), lista);
+        adapter = new Adapter_Actividades(getContext(), lista, getActivity(),qrFragment.this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        milist();
+    }
 }

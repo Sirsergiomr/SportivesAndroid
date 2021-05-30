@@ -22,7 +22,6 @@ public class DialogX {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         dialog.show();
-
     }
 
     public void show(){

@@ -55,10 +55,20 @@ public interface UserServices {
     @POST("api/v1/usuarios/get_contratados/")
     @FormUrlEncoded
     Call<String> get_contratados(@Field("data") JSONObject data);
+
     @POST("api/v1/usuarios/hacer_pago/")
     @FormUrlEncoded
     Call<String> hacer_pago(@Field("data") JSONObject data);
+
     @POST("api/v1/usuarios/comprobar_conexion/")
     @FormUrlEncoded
     Call<String> comprobar_conexion(@Field("data") JSONObject data);
+
+    @POST("api/v1/usuarios/eraser_entrenamientos/")
+    @FormUrlEncoded
+    Call<String> eraser_entrenamientos(@Field("data") JSONObject data);
+
+    @POST("api/v1/usuarios/eraser_activity/")
+    @FormUrlEncoded
+    Call<String> eraser_activity(@Field("data") JSONObject data);
 }
