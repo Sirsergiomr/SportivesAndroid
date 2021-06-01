@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         if (Preferences.getToken() == null && !loginActivo) {
             loginActivo = true;
             startActivityForResult(new Intent(this, LoginActivity.class), LOGIN_REQUEST_CODE);
-        }else{
+        }else if(Preferences.getToken() != null){
             comprobar_conexion();
         }
         super.onCreate(savedInstanceState);
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }else if (resultCode == 3333){
                 System.out.println("Comprobando activityresult 3333");
                 Preferences.clearUserPreferences();
+                loginActivo=false;
             }
         }
     }
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         ComprobarLogin();
-        comprobar_conexion();
+        if(Preferences.getToken() != null){
+            comprobar_conexion();
+        }
     }
 }

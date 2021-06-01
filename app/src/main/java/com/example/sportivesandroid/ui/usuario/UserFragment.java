@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -65,7 +66,7 @@ public class UserFragment extends Fragment {
     private Button bt_exit, bt_change_password;
     private TextView tv_name, tv_email, tv_tarjeta;
     EditText et_pass_actual,et_pass_nueva,et_repass_nueva;
-    private ImageView btActualPassword, btNewPassword, btReNewPassord,bt_add_card;
+    private ImageView btActualPassword, btNewPassword, btReNewPassord,bt_add_card, bt_change_name;
     private ArrayList<Tarjeta> tarjetas;
     private final static int WEB_VIEW_REQUEST = 123;
     Adapter_servicios_contratados adapter;
@@ -76,7 +77,6 @@ public class UserFragment extends Fragment {
         notificationsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_usuario, container, false);
-
 
         notificationsViewModel.getText()
                 .observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -96,6 +96,7 @@ public class UserFragment extends Fragment {
         tv_tarjeta = root.findViewById(R.id.tv_tarjeta);
         bt_add_card = root.findViewById(R.id.bt_add_card);
         recyclerView = root.findViewById(R.id.recycler_servicios);
+        bt_change_name = root.findViewById(R.id.iv_change_name);
         litaservicios();
         return root;
     }
@@ -162,6 +163,9 @@ public class UserFragment extends Fragment {
                 Functions.crearTarjeta(getActivity(), WEB_VIEW_REQUEST);
                 getTarjetas();
             }
+        });
+        bt_change_name.setOnClickListener(v -> {
+            dialog_cambiar_nombre(getContext());
         });
     }
 
@@ -249,7 +253,6 @@ public class UserFragment extends Fragment {
         btReNewPassord.setOnClickListener(v -> {
             showPassword(v);
         });
-
         ImageView bt_close = view.findViewById(R.id.bt_close);
         bt_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -422,5 +425,83 @@ public class UserFragment extends Fragment {
                 });
             }
         }.start();
+    }
+
+    public void cambia_nombre(String nombre){
+        JSONObject data = new JSONObject();
+        try{
+            data.put(Tags.NOMBRE, nombre);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
+                .cambiar_nombre(ApiUtils.getAuthenticationWhith(data));
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                System.out.println("Comprobar tarjertas");
+                try {
+                    JSONObject json = new JSONObject(response.body());
+                    String result;
+                    result = json.getString(Tags.RESULT);
+                    if(result.contains(Tags.OK)) {
+                        String nb = json.getString(Tags.NOMBRE);
+                        Preferences.setNameUser(nb);
+                        tv_name.setText(nb);
+                    }else{
+                        System.out.println("Error get_tarjetas " + json.get(Tags.MESSAGE));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {}
+        });
+    }
+    public void dialog_cambiar_nombre(Context context){
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_change_name, null, false);
+        ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+
+        Button bt_accept = view.findViewById(R.id.bt_accept_dialog);
+
+        bt_accept.setOnClickListener(v -> {
+            String nombre;
+            EditText ed_nombre = view.findViewById(R.id.ed_change_name);
+            nombre = ed_nombre.getText().toString();
+            if(nombre.isEmpty()){
+                Toast.makeText(getContext(),"Tienes que poner algo, si quieres cambiar tu nombre.",Toast.LENGTH_LONG).show();
+            }else{
+                cambia_nombre(nombre);
+                closeSoftKeyBoard(view);
+                dialog.dismiss();
+            }
+        });
+
+        ImageView bt_close = view.findViewById(R.id.bt_close);
+        bt_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeSoftKeyBoard(view);
+                dialog.dismiss();
+            }
+        });
+
+        Button bt_cancel = view.findViewById(R.id.bt_cancel_dialog);
+        bt_cancel.setOnClickListener(v -> {
+            closeSoftKeyBoard(view);
+            dialog.dismiss();
+        });
+
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawableResource(R.color.transparent);
+        window.setGravity(Gravity.CENTER);
+        dialog.setCancelable(false);
+        dialog.show();
     }
 }

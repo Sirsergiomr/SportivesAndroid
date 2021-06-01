@@ -141,10 +141,9 @@
 
             <TextView
                 android:id="@+id/tv_name_profile"
-                android:layout_width="277dp"
-                android:layout_height="24dp"
+                android:layout_width="184dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
                 android:text="NAME"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -200,6 +199,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tv_tarjeta"
                 app:layout_constraintStart_toEndOf="@+id/tv_tarjeta"
                 app:layout_constraintTop_toTopOf="@+id/tv_tarjeta" />
+
+            <ImageView
+                android:id="@+id/iv_change_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name_profile"
+                app:layout_constraintStart_toEndOf="@+id/tv_name_profile"
+                app:layout_constraintTop_toTopOf="@+id/tv_name_profile"
+                app:srcCompat="@android:drawable/ic_menu_edit"
+                app:tint="@color/orangebelike" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
