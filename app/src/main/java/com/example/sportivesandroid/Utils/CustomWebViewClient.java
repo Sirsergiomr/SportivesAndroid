@@ -30,29 +30,4 @@ public class CustomWebViewClient extends WebViewClient {
         return super.shouldOverrideUrlLoading(view, request);
     }
 
-
-    private boolean dialogSslError() {
-        final DialogX dialog = new DialogX(activity, R.layout.dialog_message_title);
-        dialog.dialog_confirmacion("", activity.getResources().getString(R.string.seguir_navegando), "¡Cuidado!", activity.getResources().getString(R.string.no_seguro_message),
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                }, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                        activity.finish();
-                    }
-                },
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-        dialog.show();
-        return true;
-    }
  }

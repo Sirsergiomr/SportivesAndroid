@@ -110,5 +110,6 @@ public class Preferences {
         setTipoSesion("");
         setTipoUser(false);
         setEmailUser(null);
+        setString(Tags.TARJETA,null);
     }
 }

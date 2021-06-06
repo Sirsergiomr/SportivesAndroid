@@ -22,6 +22,7 @@ import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Sportives;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -87,6 +88,7 @@ public class qrFragment extends Fragment {
     public void lista_actividades(){
         adapter = new Adapter_Actividades(getContext(), lista, getActivity(),qrFragment.this);
         recyclerView.setAdapter(adapter);
+        Sportives.setCurrentActivity(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 

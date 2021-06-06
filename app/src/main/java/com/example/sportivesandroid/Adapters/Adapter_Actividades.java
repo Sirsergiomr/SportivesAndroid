@@ -39,6 +39,7 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
     private Context context;
     private Activity activity;
     private Fragment fragment;
+    private DialogX xd;
     public Adapter_Actividades(Context context, JSONArray lista, Activity activity, Fragment fragment) {
         this.context = context;
         this.lista = lista;
@@ -74,7 +75,7 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
                 @Override
                 public void onClick(View v) {
 
-                    DialogX xd = new DialogX(activity, R.layout.dialog_message_title);
+                    xd = new DialogX(activity, R.layout.dialog_message_title);
                     xd.dialog_confirmacion("Aceptar", "Cancelar",
                             "¿Borrar Actividad?", "Si borra una actividad se borrarán todos los entrenamientos.", new View.OnClickListener() {
                                 @Override
@@ -140,6 +141,7 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
                     if (resultado.equals(Tags.OK)) {
                         notifyDataSetChanged();
                         Toast.makeText(Sportives.getContext(), "Se ha podido eliminar esta actividad", Toast.LENGTH_LONG).show();
+                        xd.dismiss();
                         if (fragment instanceof qrFragment) {
                             qrFragment qrf = (qrFragment) fragment;
                             qrf.milist();

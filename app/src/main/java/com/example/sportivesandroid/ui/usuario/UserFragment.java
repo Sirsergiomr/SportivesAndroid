@@ -45,6 +45,7 @@ import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserRequests;
 import com.example.sportivesandroid.Requests.UserServices;
 import com.example.sportivesandroid.Sportives;
+import com.example.sportivesandroid.Utils.DialogX;
 import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
@@ -71,13 +72,13 @@ public class UserFragment extends Fragment {
     private final static int WEB_VIEW_REQUEST = 123;
     Adapter_servicios_contratados adapter;
     RecyclerView recyclerView;
-    JSONArray lista;
+    JSONArray lista, transac;;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_usuario, container, false);
-
+        Sportives.setCurrentActivity(getActivity());
         notificationsViewModel.getText()
                 .observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -113,10 +114,10 @@ public class UserFragment extends Fragment {
                     String result = json.getString(Tags.RESULT);
                     if (result.contains(Tags.OK)) {
                         lista =   json.getJSONArray(Tags.LISTA);
+                        transac = json.getJSONArray("transac");
                         System.out.println("Lista servicios = "+lista+"---------------------");
+                        System.out.println("Lista transac = "+transac+"---------------------");
                         lista_contrartados();
-                    }else{
-                        Toast.makeText(getContext(),"Tenemos un problema en los servicios del Usuario",Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -131,7 +132,7 @@ public class UserFragment extends Fragment {
     }
 
     public void lista_contrartados(){
-        adapter = new Adapter_servicios_contratados(getContext(), lista);
+        adapter = new Adapter_servicios_contratados(getContext(), lista, getActivity(),transac,getParentFragmentManager());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }
@@ -161,6 +162,7 @@ public class UserFragment extends Fragment {
                 dialogCreateCard();
             }else{
                 Functions.crearTarjeta(getActivity(), WEB_VIEW_REQUEST);
+                Functions.refreshFragment(getParentFragmentManager());
                 getTarjetas();
             }
         });
@@ -339,7 +341,7 @@ public class UserFragment extends Fragment {
         builder.setPositiveButton("Añadir nueva tarjeta", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                eraser_cards();
+                Functions.eraser_cards(getParentFragmentManager());
                 Functions.crearTarjeta(getActivity(), WEB_VIEW_REQUEST);
                 getTarjetas();
             }
@@ -356,32 +358,6 @@ public class UserFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void eraser_cards(){
-        Call<String> call = RetrofitClient.getClient().create(UserServices.class)
-                .eraser_cards(ApiUtils.getBasicAuthentication());
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    JSONObject json = new JSONObject(response.body());
-                    String result;
-                    result = json.getString(Tags.RESULT);
-                    if (result.contains(Tags.OK)) {
-                        Log.v("PerfilActivity", "Borrado de tarjetas exitoso");
-                        Preferences.setString(Tags.TARJETA,null);
-                        Functions.refreshFragment(getParentFragmentManager());
-                    }else{
-                        Log.v("PerfilActivity", "Error en borrado de tarjetas");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {}
-        });
-    }
 
     public void getTarjetas(){
         new Thread() {
@@ -413,8 +389,6 @@ public class UserFragment extends Fragment {
                                 setCard();
                             }else if(result.contains(Tags.NO_VISA)){
                                 //Toast.makeText(Sportives.getContext(), R.string.no_visa,Toast.LENGTH_LONG).show();
-                            }else{
-                                System.out.println("Error get_tarjetas " + json.get(Tags.MESSAGE));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -449,7 +423,24 @@ public class UserFragment extends Fragment {
                         Preferences.setNameUser(nb);
                         tv_name.setText(nb);
                     }else{
-                        System.out.println("Error get_tarjetas " + json.get(Tags.MESSAGE));
+                        DialogX xd = new DialogX(getActivity(),R.layout.dialog_message_title);
+                        xd.dialog_confirmacion("Aceptar", "", "¡Alerta!",json.get(Tags.MESSAGE).toString(),
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        xd.dismiss();
+                                    }
+                                }, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                    }
+                                }, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        xd.dismiss();
+                                    }
+                                });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -466,12 +457,15 @@ public class UserFragment extends Fragment {
         View view = inflater.inflate(R.layout.dialog_change_name, null, false);
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         dialog.setContentView(view);
-
         Button bt_accept = view.findViewById(R.id.bt_accept_dialog);
+        EditText ed_nombre = view.findViewById(R.id.ed_change_name);
+
+        if(Preferences.getNameUser() != null){
+            ed_nombre.setText(Preferences.getNameUser());
+        }
 
         bt_accept.setOnClickListener(v -> {
             String nombre;
-            EditText ed_nombre = view.findViewById(R.id.ed_change_name);
             nombre = ed_nombre.getText().toString();
             if(nombre.isEmpty()){
                 Toast.makeText(getContext(),"Tienes que poner algo, si quieres cambiar tu nombre.",Toast.LENGTH_LONG).show();

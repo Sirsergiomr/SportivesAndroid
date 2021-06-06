@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.work.WorkManager;
 
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
@@ -24,6 +25,8 @@ import org.json.JSONObject;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,11 +41,12 @@ public class TemporizadorActivity extends AppCompatActivity {
     private Chronometer crono;
     private long timepause;
     DialogX dialog = null;
+    Timer tiempo;
+    TimerTask  reloj;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temporizador);
-
         if (getIntent().getExtras() != null) {
             if (getIntent().getExtras().getString("nombre_actividad") != null) {
                 name = getIntent().getExtras().getString("nombre_actividad");
@@ -51,7 +55,7 @@ public class TemporizadorActivity extends AppCompatActivity {
                 id_maquina = getIntent().getExtras().getString("id_maquina");
             }
         }
-
+        tiempo = new Timer();
         tv_nombre = findViewById(R.id.tv_nombre_temporizdor);
         tv_nombre.setText(name);
 
@@ -64,6 +68,7 @@ public class TemporizadorActivity extends AppCompatActivity {
             crono.setBase(SystemClock.elapsedRealtime()-timepause);
             start_stop =true;
             crono.start();
+            timerbackground();
         }
         bt_play_timer.setOnClickListener(v -> {
             if(start_stop ==false){
@@ -78,6 +83,9 @@ public class TemporizadorActivity extends AppCompatActivity {
             crono.stop();
         });
         bt_stop_timer.setOnClickListener(v -> {
+            start_stop = false;
+            timepause = SystemClock.elapsedRealtime()-crono.getBase();
+            crono.stop();
             dialogConfirmacion();
         });
     }
@@ -85,15 +93,17 @@ public class TemporizadorActivity extends AppCompatActivity {
         return (x<=9) ? ("0"+x) : String.valueOf(x);
     }
 
+    /***
+     *dialog de confirmación, ¿Terminar entrenamiento? SI NO, si pulsas que no pues sigue contando, es un dialog aparte con un comportamiento aparte;
+     */
     public void dialogConfirmacion(){
-        //todo dialog de confirmación, ¿Terminar entrenamiento? SI NO, si pulsas que no pues sigue contando, es un dialog aparte con un comportamiento aparte;
-        timepause = SystemClock.elapsedRealtime()-crono.getBase();
-        crono.stop();
+
         dialog = new DialogX(this,R.layout.dialog_message_title);
         dialog.dialog_confirmacion("Si", "No",
                                      "Cronómetro","¿Terminar entrenamieto?",
                                      v -> {
                                          crear_entrenamiento();
+                                         reloj.cancel();
                                          },
                                      v -> {
                                          crono.setBase(SystemClock.elapsedRealtime()-timepause);
@@ -162,5 +172,21 @@ public class TemporizadorActivity extends AppCompatActivity {
         super.onBackPressed();
         Intent back = new Intent(TemporizadorActivity.this, LectorActivity.class);
         startActivity(back);
+        reloj.cancel();
+    }
+
+    public void timerbackground(){
+         reloj = new TimerTask() {
+            @Override
+            public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            crono.getBase();
+                        }
+                    });
+            }
+        };
+        tiempo.schedule(reloj, 1000, 1000);
     }
 }

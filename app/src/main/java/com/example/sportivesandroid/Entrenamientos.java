@@ -1,6 +1,8 @@
 package com.example.sportivesandroid;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import com.example.sportivesandroid.Adapters.Adapter_Entrenamientos;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserServices;
+import com.example.sportivesandroid.Utils.DialogX;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -65,8 +68,28 @@ public class Entrenamientos extends AppCompatActivity{
                         lista =   json.getJSONArray(Tags.LISTA);
                         System.out.println("Lista = "+lista+"---------------------");
                         lista_entrenamientos();
-                    }else{
-                        Toast.makeText(Entrenamientos.this,"Tenemos un problema",Toast.LENGTH_LONG).show();
+                    }else if(result.contains("error")||result.contains("001")){
+                        lista =   json.getJSONArray(Tags.LISTA);
+                        System.out.println("Lista = "+lista+"---------------------");
+                        lista_entrenamientos();
+                        DialogX xd = new DialogX(Entrenamientos.this,R.layout.dialog_message_title);
+                        xd.dialog_confirmacion("Aceptar", "", "¡Alerta!",json.get(Tags.MESSAGE).toString(),
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        xd.dismiss();
+                                    }
+                                }, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                    }
+                                }, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        xd.dismiss();
+                                    }
+                                });
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

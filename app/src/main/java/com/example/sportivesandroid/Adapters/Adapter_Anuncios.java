@@ -1,5 +1,6 @@
 package com.example.sportivesandroid.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +23,7 @@ import com.example.sportivesandroid.Requests.RetrofitClient;
 import com.example.sportivesandroid.Requests.UserServices;
 import com.example.sportivesandroid.Sportives;
 import com.example.sportivesandroid.Utils.DialogX;
+import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -34,10 +37,16 @@ import retrofit2.Response;
 public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.AdaptadorViewHolder>{
     JSONArray lista;
     Context context;
+    Activity activity;
+    FragmentManager fm;
+    private final static int WEB_VIEW_REQUEST = 321;
+    DialogX xd;
 
-    public Adapter_Anuncios(Context context,JSONArray lista){
+    public Adapter_Anuncios(Context context, JSONArray lista, FragmentManager fm, Activity activity){
         this.lista=lista;
         this.context=context;
+        this.fm = fm;
+        this.activity = activity;
     }
 
     @NonNull
@@ -58,7 +67,7 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             String nombre_anuncio= entrada.getString("nombre");
             int precio = entrada.getInt("precio");
             String pk_anuncio = entrada.getString("pk");
-            System.out.println("Adater_Anuncios: Comprobar precio: "+precio);
+            System.out.println("Adater_Anuncios "+pk_anuncio+" : Comprobar precio: "+precio);
 
             holder.nombre.setText(nombre_anuncio);
             holder.descripcion.setText(descripcion);
@@ -106,10 +115,10 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             holder.bt_contratar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogX xd = new DialogX(Sportives.getCurrentActivity(),R.layout.dialog_message_title);
 
+                    xd = new DialogX(Sportives.getCurrentActivity(),R.layout.dialog_message_title);
                     xd.dialog_confirmacion("Aceptar", "Cancelar",
-                            "¿Realziar Pago?", "La siguiente operación va a realizar un cobro.", new View.OnClickListener() {
+                            "¿Realizar Pago?", "La siguiente operación va ha realizar un cobro.", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     if (precio*100 <= 0 || precio*100 <100){
@@ -191,11 +200,49 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
                     try {
                         JSONObject json = new JSONObject(response.body());
                         String result = json.getString(Tags.RESULT);
+                        String mensaje = json.getString(Tags.MESSAGE);
                         if (result.contains(Tags.OK)) {
                             Toast.makeText(context,"Todo ok",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(context,"Tenemos un problema con la transacción o este servicio ya esta contratado",Toast.LENGTH_LONG).show();
-                        }
+                            xd.dismiss();
+                        }else if(result.contains("001")){
+                            DialogX  xd = new DialogX(activity,R.layout.dialog_message_title);
+                            xd.dialog_confirmacion("Cambiar tarjeta", "", "Tu tarjeta no ha sido aceptada", "Es necesario cambiar tu tarjeta, si no quieres simplemente cierra esta ventana",
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Functions.eraser_cards(fm);
+                                            Functions.crearTarjeta(Sportives.getCurrentActivity(),WEB_VIEW_REQUEST);
+                                        }
+                                    }, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    }, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            xd.dismiss();
+                                        }
+                                    });
+                        }else if(result.contains("error")){
+                            DialogX xd = new DialogX(activity,R.layout.dialog_message_title);
+                            xd.dialog_confirmacion("Aceptar", "", "¡Alerta!",mensaje,
+                                    new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            xd.dismiss();
+                                        }
+                                    }, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+
+                                        }
+                                    }, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            xd.dismiss();
+                                        }
+                                    });                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

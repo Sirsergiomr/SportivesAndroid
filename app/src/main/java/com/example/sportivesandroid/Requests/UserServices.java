@@ -75,4 +75,9 @@ public interface UserServices {
     @POST("api/v1/usuarios/cambiar_nombre/")
     @FormUrlEncoded
     Call<String> cambiar_nombre(@Field("data") JSONObject data);
+
+
+    @POST("api/v1/usuarios/eraser_transaction/")
+    @FormUrlEncoded
+    Call<String> eraser_transaction(@Field("data") JSONObject data);
 }

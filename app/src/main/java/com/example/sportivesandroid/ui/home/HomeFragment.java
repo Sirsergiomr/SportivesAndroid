@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         });
 
         anuncios();
-
+        Sportives.setCurrentActivity(getActivity());
         recyclerView = root.findViewById(R.id.recycler_anuncios);
 
         return root;
@@ -75,8 +75,6 @@ public class HomeFragment extends Fragment {
                             lista =   json.getJSONArray(Tags.LISTA);
                             System.out.println("Lista anuncios = "+lista+"---------------------");
                             lista_anuncios();
-                        }else{
-                            Toast.makeText(getContext(),"Tenemos un problema en los anuncios",Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -92,7 +90,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void lista_anuncios(){
-        adapter = new Adapter_Anuncios(getContext(), lista);
+        adapter = new Adapter_Anuncios(getContext(), lista,getParentFragmentManager(),getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
