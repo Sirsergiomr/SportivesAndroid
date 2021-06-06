@@ -73,13 +73,15 @@
 
             <TextView
                 android:id="@+id/tv_email_profile"
-                android:layout_width="277dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="41dp"
+                android:layout_width="279dp"
+                android:layout_height="28dp"
                 android:text="Email"
                 android:textColor="@color/orangebelike"
+                android:textIsSelectable="false"
                 android:textSize="18sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7" />
 
             <androidx.recyclerview.widget.RecyclerView

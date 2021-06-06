@@ -24,6 +24,7 @@ import com.example.sportivesandroid.Requests.UserServices;
 import com.example.sportivesandroid.Sportives;
 import com.example.sportivesandroid.Utils.DialogX;
 import com.example.sportivesandroid.Utils.Functions;
+import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
 
 import org.json.JSONArray;
@@ -210,7 +211,9 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
                                     new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Functions.eraser_cards(fm);
+                                            if(Preferences.getString(Tags.TARJETA)!=null && Preferences.getString(Tags.TARJETA)!=""){
+                                                Functions.eraser_cards(fm);
+                                            }
                                             Functions.crearTarjeta(Sportives.getCurrentActivity(),WEB_VIEW_REQUEST);
                                         }
                                     }, new View.OnClickListener() {

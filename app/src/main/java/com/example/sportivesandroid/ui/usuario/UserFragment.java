@@ -73,6 +73,7 @@ public class UserFragment extends Fragment {
     Adapter_servicios_contratados adapter;
     RecyclerView recyclerView;
     JSONArray lista, transac;;
+    Dialog dialogps;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -225,12 +226,12 @@ public class UserFragment extends Fragment {
     }
 
     public void DialogChangePassword(Context context) {
-        Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogps = new Dialog(context);
+        dialogps.requestWindowFeature(Window.FEATURE_NO_TITLE);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_change_password, null, false);
         ((Activity) context).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        dialog.setContentView(view);
+        dialogps.setContentView(view);
 
         btActualPassword = view.findViewById(R.id.btVisibleConfirmPassword);
 
@@ -260,14 +261,14 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 closeSoftKeyBoard(view);
-                dialog.dismiss();
+                dialogps.dismiss();
             }
         });
 
         Button bt_cancel = view.findViewById(R.id.bt_cancel);
         bt_cancel.setOnClickListener(v -> {
             closeSoftKeyBoard(view);
-            dialog.dismiss();
+            dialogps.dismiss();
         });
 
         Button bt_accept = view.findViewById(R.id.bt_accept);
@@ -292,12 +293,12 @@ public class UserFragment extends Fragment {
             }
         });
 
-        final Window window = dialog.getWindow();
+        final Window window = dialogps.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawableResource(R.color.transparent);
         window.setGravity(Gravity.CENTER);
-        dialog.setCancelable(false);
-        dialog.show();
+        dialogps.setCancelable(false);
+        dialogps.show();
     }
 
     public void change_password(String newPassword, String oldPassword) {
@@ -318,6 +319,7 @@ public class UserFragment extends Fragment {
                     String result = json.getString(Tags.RESULT);
                     if (result.contains(Tags.OK)) {
                         Toast.makeText(getActivity(),R.string.successful_change_password,Toast.LENGTH_LONG).show();
+                        dialogps.dismiss();
                     }else{
                         Toast.makeText(getActivity(),R.string.error_password_message,Toast.LENGTH_LONG).show();
                     }
