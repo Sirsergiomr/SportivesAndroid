@@ -37,13 +37,11 @@ import retrofit2.Response;
 public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder> {
     private JSONArray lista;
     private Context context;
-    private Activity activity;
     private Fragment fragment;
     private DialogX xd;
-    public Adapter_Actividades(Context context, JSONArray lista, Activity activity, Fragment fragment) {
+    public Adapter_Actividades(Context context, JSONArray lista, Fragment fragment) {
         this.context = context;
         this.lista = lista;
-        this.activity = activity;
         this.fragment = fragment;
     }
 
@@ -75,7 +73,7 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
                 @Override
                 public void onClick(View v) {
 
-                    xd = new DialogX(activity, R.layout.dialog_message_title);
+                    xd = new DialogX(Sportives.getCurrentActivity(), R.layout.dialog_message_title);
                     xd.dialog_confirmacion("Aceptar", "Cancelar",
                             "¿Borrar Actividad?", "Si borra una actividad se borrarán todos los entrenamientos.", new View.OnClickListener() {
                                 @Override

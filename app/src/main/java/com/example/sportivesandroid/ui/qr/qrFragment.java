@@ -29,6 +29,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +58,7 @@ public class qrFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycler_view_actividades);
 
         milist();
-
+        Sportives.setCurrentActivity(getActivity());
         return root;
     }
 
@@ -86,9 +88,8 @@ public class qrFragment extends Fragment {
     }
 
     public void lista_actividades(){
-        adapter = new Adapter_Actividades(getContext(), lista, getActivity(),qrFragment.this);
+        adapter = new Adapter_Actividades(getContext(), lista,qrFragment.this);
         recyclerView.setAdapter(adapter);
-        Sportives.setCurrentActivity(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
