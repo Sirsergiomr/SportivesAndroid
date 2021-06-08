@@ -74,10 +74,10 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             holder.descripcion.setText(descripcion);
             if(precio!=0){
                 holder.precio.setText(precio+"");
-                holder.tv_€.setVisibility(View.VISIBLE);
+                holder.tv_e.setVisibility(View.VISIBLE);
             }else{
                 holder.precio.setText("");
-                holder.tv_€.setVisibility(View.GONE);
+                holder.tv_e.setVisibility(View.GONE);
 
             }
             String foto = entrada.getString("imagen");
@@ -148,7 +148,7 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             holder.nombre.setText("");
             holder.descripcion.setText("Ya no quedán anuncios :D");
             holder.precio.setText("");
-            holder.tv_€.setVisibility(View.GONE);
+            holder.tv_e.setVisibility(View.GONE);
             Glide.with(context)
                     .load(R.drawable.logo_sportives_titans_3)
                     .placeholder(R.drawable.logo_sportives_titans_3)
@@ -168,7 +168,7 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
 
     public class AdaptadorViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout layout_item;
-        TextView nombre, descripcion,precio,tv_descripción_oferta2, tv_title_2,tv_€;
+        TextView nombre, descripcion,precio,tv_descripción_oferta2, tv_title_2,tv_e;
         ImageView imagen;
         Button bt_contratar;
         public AdaptadorViewHolder(@NonNull View itemView) {
@@ -181,7 +181,7 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
             layout_item = itemView.findViewById(R.id.item_oferta);
             bt_contratar = itemView.findViewById(R.id.bt_contratar);
             tv_title_2 = itemView.findViewById(R.id.tv_name_oferta2);
-            tv_€ = itemView.findViewById(R.id.tv_euro);
+            tv_e = itemView.findViewById(R.id.tv_euro);
 
         }
     }

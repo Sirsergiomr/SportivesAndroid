@@ -40,6 +40,15 @@ import kotlin.sequences.USequencesKt;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+/**
+ * Activity for loading all the app and control conexions & fragments.
+ *
+ * This activity is used to change between diferents fragments, check the server connection.
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 
 public class MainActivity extends AppCompatActivity {
     private boolean  loginActivo = false;
@@ -84,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
-     * */
+     * Method that check the camera permissions
+     * Take the current status of the permit and see if it is granted
+     */
+
     private void cameraPermisions(){
         int estadoDePermiso = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (estadoDePermiso == PackageManager.PERMISSION_GRANTED){
@@ -115,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method that check the server connection
+     *
+     */
     public void comprobar_conexion(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .get_anuncios(ApiUtils.getBasicAuthentication());
@@ -142,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * Method that adds two integers together
+     *
+     *
+     * @return The resulting sum of a and b
+     */
 
     public void ComprobarLogin(){
         System.out.println("CompobarLogin MainActivity ");
