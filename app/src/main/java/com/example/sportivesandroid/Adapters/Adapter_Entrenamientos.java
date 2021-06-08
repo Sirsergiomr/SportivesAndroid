@@ -68,7 +68,7 @@ public class Adapter_Entrenamientos extends RecyclerView.Adapter<Adapter_Entrena
                     System.out.println("Pk entrenamiento = " + entrenamiento_id);
                     DialogX xd = new DialogX(Sportives.getCurrentActivity(), R.layout.dialog_message_title);
                     xd.dialog_confirmacion("Aceptar", "Cancelar",
-                            "¿Borrar Entrenamiento?", "La siguiente operación va ha borar este ejercicio.", new View.OnClickListener() {
+                            "¿Borrar Entrenamiento?", "La siguiente operación va a borrar este ejercicio.", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     eraser_entrenamiento(entrenamiento_id);

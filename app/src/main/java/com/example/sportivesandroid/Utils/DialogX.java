@@ -68,6 +68,10 @@ public class DialogX {
         });
     }
 
+    /**
+     *
+     * */
+
     public void dialog_confirmacion(String nombre_boton_aceptar, String nombre_boton_cancelar, String titulo, String mensaje, View.OnClickListener aceptar, View.OnClickListener cancelar, View.OnClickListener close){
         TextView title = dialog.findViewById(R.id.tv_title_dialog);
         TextView message = dialog.findViewById(R.id.tv_mensaje_dialog);
