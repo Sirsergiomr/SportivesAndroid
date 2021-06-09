@@ -31,7 +31,12 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ *  This adapter set a training´s list in the recycler with a layout
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class Adapter_Entrenamientos extends RecyclerView.Adapter<Adapter_Entrenamientos.AdaptadorViewHolder> {
     JSONArray lista;
     Context context;
@@ -49,7 +54,10 @@ public class Adapter_Entrenamientos extends RecyclerView.Adapter<Adapter_Entrena
         Adapter_Entrenamientos.AdaptadorViewHolder holder = new Adapter_Entrenamientos.AdaptadorViewHolder(v);
         return holder;
     }
-
+    /**
+     * Take the position and use then to identified a workout, filter by the pk and try to delete this workout
+     *
+     * */
     @Override
     public void onBindViewHolder(@NonNull Adapter_Entrenamientos.AdaptadorViewHolder holder, int position) {
         try {
@@ -113,7 +121,10 @@ public class Adapter_Entrenamientos extends RecyclerView.Adapter<Adapter_Entrena
             layout_item = itemView.findViewById(R.id.entrenamiento_row);
         }
     }
-
+    /**
+     * Use this method to delete a specific workout by pk
+     * @param entrenamiento_id is a training pk
+     * */
     public void eraser_entrenamiento(String entrenamiento_id) {
         JSONObject data = new JSONObject();
         try {

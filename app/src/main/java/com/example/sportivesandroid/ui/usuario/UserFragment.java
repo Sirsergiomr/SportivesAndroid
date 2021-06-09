@@ -127,7 +127,7 @@ public class UserFragment extends Fragment {
     }
     /**
      * Set the list on the adapter and the adapter on the recycler
-     *
+     * @see Adapter_servicios_contratados
      * */
     public void lista_contrartados(){
         adapter = new Adapter_servicios_contratados(getContext(), lista, getActivity(),transac,getParentFragmentManager());

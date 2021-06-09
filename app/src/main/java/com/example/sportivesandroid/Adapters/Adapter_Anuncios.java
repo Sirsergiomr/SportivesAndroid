@@ -34,7 +34,12 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ *  This adapter set a advertisements list in the recycler with a layout
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.AdaptadorViewHolder>{
     JSONArray lista;
     Context context;
@@ -57,7 +62,9 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
         AdaptadorViewHolder holder = new AdaptadorViewHolder(v);
         return holder;
     }
-
+    /**
+     * It takes the position and uses it later to identify an advertisement finally filters by the pk and includes a dialogue to pay for this service.
+     * */
     @Override
     public void onBindViewHolder(@NonNull AdaptadorViewHolder holder, int position) {
 
@@ -185,7 +192,15 @@ public class Adapter_Anuncios extends RecyclerView.Adapter<Adapter_Anuncios.Adap
 
         }
     }
-
+    /**
+     * This method made a call to the server to pay a service
+     * @param  pk_anuncio to select the service
+     * @param precio value of service
+     *
+     * It includes two dialog boxes, the first to change the card if the payment fails and the second to show other errors
+     * @see DialogX or xd in this method
+     *
+     * */
     public void pagar(String pk_anuncio ,int precio){
 
         try {

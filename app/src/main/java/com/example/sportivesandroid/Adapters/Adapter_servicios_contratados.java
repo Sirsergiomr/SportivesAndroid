@@ -35,7 +35,11 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * This adapter has the contracted services
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class Adapter_servicios_contratados extends RecyclerView.Adapter<Adapter_servicios_contratados.AdaptadorViewHolder>{
     JSONArray lista, transac;
     Context context;
@@ -56,7 +60,11 @@ public class Adapter_servicios_contratados extends RecyclerView.Adapter<Adapter_
         Adapter_servicios_contratados.AdaptadorViewHolder holder = new Adapter_servicios_contratados.AdaptadorViewHolder(v);
         return holder;
     }
-
+    /**
+     * Use dialog_confirmacion to see a description of the service or to answer if you want to delete this contracted service
+     * @param  position to identified the service
+     * @param holder to set dates in item_layout
+     * */
     @Override
     public void onBindViewHolder(@NonNull AdaptadorViewHolder holder, int position) {
         try {
@@ -136,7 +144,10 @@ public class Adapter_servicios_contratados extends RecyclerView.Adapter<Adapter_
             imagen = itemView.findViewById(R.id.iv_image);
         }
     }
-
+    /**
+     * Use this method to delete a specific transaction by pk, in Stripe you can find this but on the server it is deleted
+     * @param tr_pk is a transaction pk
+     * */
     public void erasertransaction(String tr_pk){
         JSONObject data = new JSONObject();
         try {

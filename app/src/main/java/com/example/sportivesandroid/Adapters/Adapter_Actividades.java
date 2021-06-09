@@ -33,7 +33,12 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ *     This adapter set a activity´s list in the recycler with a layout
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder> {
     private JSONArray lista;
     private Context context;
@@ -52,7 +57,10 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
         com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder holder = new com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder(v);
         return holder;
     }
-
+    /**
+     * Take the position and use then to identify an activity, filter by the pk and the date of the activity and later take the list of workouts.
+     * And can filter by pk finally try to remove this activity and workouts that have the same date as the parent.
+     * */
     @Override
     public void onBindViewHolder(@NonNull com.example.sportivesandroid.Adapters.Adapter_Actividades.AdaptadorViewHolder holder, int position) {
         try {
@@ -117,8 +125,11 @@ public class Adapter_Actividades extends RecyclerView.Adapter<com.example.sporti
             iv_delete_2 = itemView.findViewById(R.id.iv_delete_2);
         }
     }
-
-
+    /**
+     * Use this method to delete a specific advertisements by hi pk and date
+     * @param actividad_id is a activity pk
+     * @param fecha is a variable to filter this activity by date
+     * */
     public void eraser_activity(String actividad_id, String fecha) {
         JSONObject data = new JSONObject();
         try {

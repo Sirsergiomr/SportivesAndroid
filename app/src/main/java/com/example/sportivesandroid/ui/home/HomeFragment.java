@@ -32,7 +32,13 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * This class contains the service catalog
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ * */
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
@@ -60,7 +66,12 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
-
+    /**
+     *
+     * This method made a call to the server to get a list of advertisements
+     * and sends this list to configure in its corresponding adapter.
+     *
+     * */
     public void anuncios(){
         if(!Preferences.getID().equals("-1")){
             Call<String> call = RetrofitClient.getClient().create(UserServices.class)
@@ -88,7 +99,10 @@ public class HomeFragment extends Fragment {
             });
         }
     }
-
+    /**
+     * Set the list on the adapter and the adapter on the recycler
+     * @see Adapter_Anuncios
+     * */
     public void lista_anuncios(){
         adapter = new Adapter_Anuncios(getContext(), lista,getParentFragmentManager(),getActivity());
         recyclerView.setAdapter(adapter);
