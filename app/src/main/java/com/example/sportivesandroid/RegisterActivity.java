@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         bt_show_newpassword = findViewById(R.id.btVisibleNewPassword);
 
         tv_login = findViewById(R.id.tv_login);
-
+        //Go to login
         tv_login.setOnClickListener(v -> {
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         });
@@ -72,6 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+    /**
+     * Show the password
+     * @param  view from onclick
+     * */
     public void showPassword(View view){
         switch (view.getId()){
             case R.id.btVisibleNewPassword:
@@ -94,6 +98,10 @@ public class RegisterActivity extends AppCompatActivity {
                 break;
         }
     }
+    /**
+     * Validate fields to register correctly
+     *
+     * */
     private boolean validateFields() {
         if (et_email.getText().toString().isEmpty()) {
             Toast.makeText(this, getString(R.string.empty_email_message), Toast.LENGTH_SHORT).show();
@@ -114,6 +122,12 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+    /**
+     * Try to register on the server and if this is successful then you can try to access.
+     *
+     * */
     private void register(){
         bt_registrarse.setEnabled(false);
         bt_registrarse.setText("");

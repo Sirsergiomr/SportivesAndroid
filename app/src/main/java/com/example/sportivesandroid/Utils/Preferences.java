@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 
 import com.example.sportivesandroid.MainActivity;
 import com.example.sportivesandroid.Sportives;
-
+/**
+ * SharedPreferences
+ *
+ * */
 public class Preferences {
     private static Context context = Sportives.getContext();
 

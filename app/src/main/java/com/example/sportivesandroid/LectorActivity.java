@@ -68,6 +68,7 @@ public class LectorActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         initializeUi();
         iniciarQrDetector();
+        //Close the LectorActity
         bt_cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +76,9 @@ public class LectorActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * As you can see is a loading :D
+     * */
     private AlertDialog cargando() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -90,7 +93,9 @@ public class LectorActivity extends AppCompatActivity {
         return builder.create();
 
     }
-
+    /**
+     * Well... init Ui variables
+     * */
     private void initializeUi() {
         scanner = findViewById(R.id.surfaceView);
         cameraPreview = findViewById(R.id.surfaceView);
@@ -98,7 +103,9 @@ public class LectorActivity extends AppCompatActivity {
         cargando = cargando();
     }
 
-
+    /**
+     * Start the QR detector, if find a number, send this to check and search on database
+     * */
     private void iniciarQrDetector() {
 
         System.out.println("Iniciar Qr");
@@ -176,7 +183,10 @@ public class LectorActivity extends AppCompatActivity {
             }
         });
     }
-
+    /**
+     * Search the database for the number the detector found.
+     * @see UserServices
+     * */
     public void comprueba_maquina(String id) {
         JSONObject data = new JSONObject();
 

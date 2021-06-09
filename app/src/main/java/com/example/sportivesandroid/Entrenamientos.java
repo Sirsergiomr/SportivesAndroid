@@ -54,7 +54,10 @@ public class Entrenamientos extends AppCompatActivity{
 
         milist();
     }
-
+    /**
+     * lists the workouts and send this list to Adapter_Entrenamientos
+     * @see Adapter_Entrenamientos
+     * */
     public void milist(){
         JSONObject data = new JSONObject();
 
@@ -111,7 +114,9 @@ public class Entrenamientos extends AppCompatActivity{
         });
     }
 
-
+    /**
+     * Init the adapter and set on recyclerview
+     * */
     public void lista_entrenamientos(){
         adapter = new Adapter_Entrenamientos(Entrenamientos.this, lista, this);
         rv_entrenamietos.setAdapter(adapter);

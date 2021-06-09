@@ -100,7 +100,7 @@ public class TemporizadorActivity extends AppCompatActivity {
     }
 
     /***
-     *dialog de confirmación, ¿Terminar entrenamiento? SI NO, si pulsas que no pues sigue contando, es un dialog aparte con un comportamiento aparte;
+     *Confirmation dialog, Finish training? YES NO, if you click no, it keeps counting, it is a separate dialog with a separate behavior;
      */
     public void dialogConfirmacion(){
 
@@ -120,6 +120,10 @@ public class TemporizadorActivity extends AppCompatActivity {
                                          dialog.dismiss();
                                      });}
 
+
+    /**
+     * Try to create a training with time, machine_id and date of creation
+     * */
     public void crear_entrenamiento(){
         Calendar c = Calendar.getInstance();
         String hora = dosdigitos(c.get(c.HOUR_OF_DAY))+":" +dosdigitos(c.get(c.MINUTE))+":"+ dosdigitos(c.get(c.SECOND));
@@ -173,6 +177,9 @@ public class TemporizadorActivity extends AppCompatActivity {
         dialog.dismiss();
     }
 
+    /**
+     * Star again the LectorActivity for find more QR codes
+     * */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -180,7 +187,9 @@ public class TemporizadorActivity extends AppCompatActivity {
         startActivity(back);
         reloj.cancel();
     }
-
+    /**
+     * When the app goes to the background it is necessary that the stopwatch does not stop.
+     * */
     public void timerbackground(){
          reloj = new TimerTask() {
             @Override

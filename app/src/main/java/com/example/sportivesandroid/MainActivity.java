@@ -45,6 +45,9 @@ import retrofit2.Response;
  *
  * This activity is used to change between diferents fragments, check the server connection.
  * @see Tags use to take strigns
+ * @see com.example.sportivesandroid.ui.home.HomeFragment
+ * @see com.example.sportivesandroid.ui.qr.qrFragment
+ * @see com.example.sportivesandroid.ui.usuario.UserFragment
  * @author Sergio Muñoz Ruiz
  * @version 2021.0606
  * @since 30.0
