@@ -9,7 +9,9 @@ import android.webkit.WebViewClient;
 
 import com.example.sportivesandroid.R;
 
-
+/**
+ * @deprecated
+ * */
 public class CustomWebViewClient extends WebViewClient {
     Context context;
     Activity activity;

@@ -46,9 +46,13 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * User profile, nick name, password, card, hired services  and log out
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class UserFragment extends Fragment {
-
     private UserViewModel notificationsViewModel;
     private Button bt_exit, bt_change_password;
     private TextView tv_name, tv_email, tv_tarjeta;
@@ -88,7 +92,11 @@ public class UserFragment extends Fragment {
         litaservicios();
         return root;
     }
-
+    /**
+     *It makes a list with a call to the server and sends this list to configure in its corresponding adapter.
+     *@see Adapter_servicios_contratados
+     *
+     * */
     public void litaservicios(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
                 .get_contratados(ApiUtils.getBasicAuthentication());
@@ -117,12 +125,16 @@ public class UserFragment extends Fragment {
             }
         });
     }
-
+    /**
+     * Set the list on the adapter and the adapter on the recycler
+     *
+     * */
     public void lista_contrartados(){
         adapter = new Adapter_servicios_contratados(getContext(), lista, getActivity(),transac,getParentFragmentManager());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -157,7 +169,9 @@ public class UserFragment extends Fragment {
             dialog_cambiar_nombre(getContext());
         });
     }
-
+    /**
+     * Change the appearance of the card button using preferences to see whether or not you have a card
+     * */
     public void setCard(){
         if(Preferences.getString(Tags.TARJETA) != null && !Preferences.getString(Tags.TARJETA).equals("")){
             bt_add_card.setImageResource(R.drawable.cardtem2);
@@ -166,7 +180,10 @@ public class UserFragment extends Fragment {
             tv_tarjeta.setText(R.string.aqui_card);
         }
     }
-
+    /**
+     * When you change the password and need to check make the content of the edit text visible
+     *
+     * */
     public void showPassword(View view){
         switch (view.getId()){
             case R.id.btVisibleConfirmPassword:
@@ -205,12 +222,20 @@ public class UserFragment extends Fragment {
         super.onResume();
         tarjetas = new ArrayList<>();
     }
-
+    /**
+     * When you close a dialog box, you need to close the keyboard.
+     *
+     * */
     public void closeSoftKeyBoard(View view) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
+    /**
+     *
+     *Opens a dialog to change the password and verify all parameters
+     * @param context to set the context dialog
+     *
+     */
     public void DialogChangePassword(Context context) {
         dialogps = new Dialog(context);
         dialogps.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -286,7 +311,12 @@ public class UserFragment extends Fragment {
         dialogps.setCancelable(false);
         dialogps.show();
     }
-
+    /**
+     * you change the password with a call to the server
+     *
+     * @param  newPassword to change the old password
+     * @param  oldPassword to change by newPassword
+     * */
     public void change_password(String newPassword, String oldPassword) {
         JSONObject data = new JSONObject();
         try {
@@ -321,6 +351,13 @@ public class UserFragment extends Fragment {
         });
     }
 
+    /**
+     * AlertDialog to warn the user that their card will be deleted from the system
+     *
+     * @see Functions eraser_cards to deleted the old card
+     * @see Functions crearTarjeta to create a new  card
+     *
+     * */
     private void dialogCreateCard(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("¡¡Cuidado!!");
@@ -346,7 +383,13 @@ public class UserFragment extends Fragment {
         alertDialog.show();
     }
 
-
+    /**
+     * This method made a call to the server to get a list of cards (in this case only one)
+     *
+     * and setCard to see if the user have or not a card.
+     *
+     *
+     * */
     public void getTarjetas(){
         new Thread() {
             @Override
@@ -388,7 +431,10 @@ public class UserFragment extends Fragment {
             }
         }.start();
     }
-
+    /**
+     *This method made a call to the server to change the user name
+     * @param nombre new name
+     * */
     public void cambia_nombre(String nombre){
         JSONObject data = new JSONObject();
         try{
@@ -438,6 +484,10 @@ public class UserFragment extends Fragment {
             public void onFailure(Call<String> call, Throwable t) {}
         });
     }
+    /**
+     *AlertDialog to change the user name
+     * @param  context to set the context dialog
+     * */
     public void dialog_cambiar_nombre(Context context){
         Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
