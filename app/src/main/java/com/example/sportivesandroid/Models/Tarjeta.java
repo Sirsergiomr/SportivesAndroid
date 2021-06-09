@@ -3,7 +3,10 @@ package com.example.sportivesandroid.Models;
 import com.example.sportivesandroid.Utils.Tags;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/**
+ * Card model
+ * @see com.example.sportivesandroid.ui.usuario.UserFragment
+ * */
 public class Tarjeta {
 
     private String pk, caducidad, end_digits, titular, tipo;

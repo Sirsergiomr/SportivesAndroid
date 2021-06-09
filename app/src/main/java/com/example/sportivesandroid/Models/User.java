@@ -3,7 +3,10 @@ package com.example.sportivesandroid.Models;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.example.sportivesandroid.Utils.Tags;
-
+/**
+ * User model {@link User}
+ *
+ * */
 public class User {
 
     private String username;

@@ -5,11 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,40 +21,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.sportivesandroid.Adapters.Adapter_Anuncios;
 import com.example.sportivesandroid.Adapters.Adapter_servicios_contratados;
-import com.example.sportivesandroid.MainActivity;
 import com.example.sportivesandroid.Models.Tarjeta;
-import com.example.sportivesandroid.Models.User;
 import com.example.sportivesandroid.R;
 import com.example.sportivesandroid.Requests.ApiUtils;
 import com.example.sportivesandroid.Requests.RetrofitClient;
-import com.example.sportivesandroid.Requests.UserRequests;
 import com.example.sportivesandroid.Requests.UserServices;
 import com.example.sportivesandroid.Sportives;
 import com.example.sportivesandroid.Utils.DialogX;
 import com.example.sportivesandroid.Utils.Functions;
 import com.example.sportivesandroid.Utils.Preferences;
 import com.example.sportivesandroid.Utils.Tags;
-import com.example.sportivesandroid.ui.qr.qrFragment;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

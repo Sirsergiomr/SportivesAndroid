@@ -11,9 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sportivesandroid.R;
-
+/**
+ * DialogX activity, this class is useful to create different customs dialogs
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0*/
 public class DialogX {
     private Dialog dialog;
+    /**
+     * @param  activity where you want to put a custom dialog
+     * @param  layout of this custom dialog
+     *
+     * */
     public DialogX(Activity activity, int layout){
 
         dialog = new Dialog(activity);
@@ -23,11 +33,15 @@ public class DialogX {
 
         dialog.show();
     }
-
+    /**
+     * To show the dialog
+     * */
     public void show(){
         dialog.show();
     }
-
+    /**
+     * To close the dialog
+     * */
     public void dismiss(){
         dialog.dismiss();
     }
@@ -52,10 +66,12 @@ public class DialogX {
             }
         });
     }
-
+    /**
+     * To close the dialog by a small button, because this button be in all dialogs
+     * @param close to custom the onclick of this button
+     * */
     private void closeButton(View.OnClickListener close){
         ImageView bt_close = dialog.findViewById(R.id.bt_close);
-
         bt_close.setOnClickListener(close);
     }
 
@@ -69,9 +85,13 @@ public class DialogX {
     }
 
     /**
-     *
+     * To make a custom dialog in title, message, button name and button behavior
+     * @param nombre_boton_aceptar name of right button
+     * @param nombre_boton_cancelar name of left button
+     * @param titulo set dialog title
+     * @param mensaje set dialog message
+     * @param close to custom the onclick of this button
      * */
-
     public void dialog_confirmacion(String nombre_boton_aceptar, String nombre_boton_cancelar, String titulo, String mensaje, View.OnClickListener aceptar, View.OnClickListener cancelar, View.OnClickListener close){
         TextView title = dialog.findViewById(R.id.tv_title_dialog);
         TextView message = dialog.findViewById(R.id.tv_mensaje_dialog);
