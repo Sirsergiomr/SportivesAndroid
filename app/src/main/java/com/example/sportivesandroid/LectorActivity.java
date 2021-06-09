@@ -39,7 +39,15 @@ import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * Activity for read QR codes.
+ *
+ * This activity is used to read a QR code and send yo to TemporizadorActivity
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class LectorActivity extends AppCompatActivity {
     CameraSource cameraSource;
     BarcodeDetector barcodeDetector;

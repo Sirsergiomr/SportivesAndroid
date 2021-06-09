@@ -5,7 +5,13 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/**
+ * Activity that you see when you start the app.
+ *  For go to mainActivity.
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class SplashScreen extends AppCompatActivity {
 
     @Override

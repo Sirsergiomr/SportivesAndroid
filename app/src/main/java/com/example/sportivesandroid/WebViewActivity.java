@@ -19,7 +19,14 @@ import com.example.sportivesandroid.Utils.Tags;
 
 import java.util.HashMap;
 
-
+/**
+ * This class is a universal WebView.
+ * You can load a url that you want see. Easy :D!!
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ **/
 public class WebViewActivity extends AppCompatActivity {
 
     WebView webView;
@@ -44,7 +51,10 @@ public class WebViewActivity extends AppCompatActivity {
         super.onResume();
         Functions.setDecorView(com.example.sportivesandroid.WebViewActivity.this);
     }
-
+/**
+ * To go back in the page.
+ *
+ * */
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
@@ -54,7 +64,10 @@ public class WebViewActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * To charge the page.
+     *
+     * */
     private void cargarWebView() {
 
         webView.setWebChromeClient(new WebChromeClient() {
@@ -89,7 +102,10 @@ public class WebViewActivity extends AppCompatActivity {
         headers.put("TOKEN", Preferences.getToken());
         webView.loadUrl(url , headers);
     }
-
+    /**
+     * Well, as you can see by the name, init the Ui.
+     *
+     * */
     private void initUi() {
         webView = findViewById(R.id.webview_use);
         customWebViewClient = new CustomWebViewClient(com.example.sportivesandroid.WebViewActivity.this, com.example.sportivesandroid.WebViewActivity.this);
@@ -105,19 +121,29 @@ public class WebViewActivity extends AppCompatActivity {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
-
+    /**
+     * @deprecated
+     * I never use this thing.
+     * */
     @JavascriptInterface
     public void finalizarPago() {
         setResult(0);
         finish();
     }
-
+    /**
+     * @deprecated
+     *I never use this thing.
+     * */
     @JavascriptInterface
     public void pagoCancelado() {
 
         setResult(-1);
         finish();
     }
+    /**
+     * @deprecated
+     *I never use this thing.
+     * */
     @JavascriptInterface
     public void logOut() {
         System.out.println("Comprobar LLamada a logOut");

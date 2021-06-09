@@ -6,7 +6,9 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-
+/**
+ * This interface is essentially a connector to the server using Post
+ * */
 public interface UserServices {
 
     @POST("api/v1/usuarios/login/")

@@ -7,7 +7,13 @@ import android.content.Context;
 import com.example.sportivesandroid.Utils.Tags;
 import com.stripe.android.PaymentConfiguration;
 
-
+/**
+ * Activity to catch the context or activity at any time.
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class Sportives extends Application {
 
     private static Context context;

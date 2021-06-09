@@ -19,6 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sportivesandroid.Requests.UserRequests;
 import com.example.sportivesandroid.Utils.Preferences;
+/**
+ * Activity for log users.
+ *
+ * This activity is used to log the user into the app.
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 
 public class LoginActivity extends AppCompatActivity {
     EditText et_email, et_password;
@@ -37,11 +46,11 @@ public class LoginActivity extends AppCompatActivity {
         bt_show_password =findViewById(R.id.btVisiblePassword_log);
 
         tv_register = findViewById(R.id.tv_register);
-
+        //If register is successful put the email on edit text..
         if(Preferences.getEmailUser() != null && !Preferences.getEmailUser().equals("")){
                 et_email.setText(Preferences.getEmailUser());
         }
-
+        //To see the password
         bt_show_password.setOnClickListener(v -> {
             if(et_password.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
                 bt_show_password.setImageResource(R.drawable.ic_remove_red_eye);
@@ -51,17 +60,20 @@ public class LoginActivity extends AppCompatActivity {
                 et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
-
+        //To go to register activity
         tv_register.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
-
+        //Try to enter
         bt_log.setOnClickListener(v -> {
             if(validateFields()){
                 login();
             }
         });
     }
+    /**
+     * Try to validate the fields when you try to enter into the app.
+     * */
     private boolean validateFields() {
         if (et_email.getText().toString().isEmpty()) {
             Toast.makeText(this, getString(R.string.empty_email_message), Toast.LENGTH_SHORT).show();
@@ -72,6 +84,11 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+    /**
+     * Change to see the progressbar and call login form UserRequest
+     *
+     * @see UserRequests
+     * */
     private void login() {
         bt_log.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
@@ -80,6 +97,9 @@ public class LoginActivity extends AppCompatActivity {
         Preferences.clearUserPreferences();
         UserRequests.login(LoginActivity.this, et_email.getText().toString(), et_password.getText().toString());
     }
+    /**
+     * Set enable button login
+     * */
     public void enableLogin() {
         bt_log.setVisibility(View.VISIBLE);
         bt_log.setEnabled(true);

@@ -25,7 +25,15 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * Activity to list workouts .
+ *
+ * This activity lists the workouts for a specific date
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class Entrenamientos extends AppCompatActivity{
     private Adapter_Entrenamientos adapter;
     private RecyclerView rv_entrenamietos;

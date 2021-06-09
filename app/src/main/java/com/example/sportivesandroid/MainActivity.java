@@ -44,7 +44,7 @@ import retrofit2.Response;
  * Activity for loading all the app and control conexions & fragments.
  *
  * This activity is used to change between diferents fragments, check the server connection.
- *
+ * @see Tags use to take strigns
  * @author Sergio Muñoz Ruiz
  * @version 2021.0606
  * @since 30.0
@@ -107,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Here we,re checking the results from WebViewActivity
+     * @see WebViewActivity
+     *and LoginActivity
+     * @see LoginActivity
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -128,11 +135,11 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Method that check the server connection
-     *
+     * @see UserServices
      */
     public void comprobar_conexion(){
         Call<String> call = RetrofitClient.getClient().create(UserServices.class)
-                .get_anuncios(ApiUtils.getBasicAuthentication());
+                .comprobar_conexion(ApiUtils.getBasicAuthentication());
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -158,10 +165,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     /**
-     * Method that adds two integers together
-     *
-     *
-     * @return The resulting sum of a and b
+     * Method that check if you stay log or not, if getToken is null or is empty you come back to login.
+     * param loginActivo use to check if you came form login or not, the same thing with comingfromlogin
      */
 
     public void ComprobarLogin(){
@@ -172,7 +177,10 @@ public class MainActivity extends AppCompatActivity {
             comingFromLogin = false;
         }
     }
-
+    /**
+     * Here check again the connection and login.
+     *
+     */
     @Override
     protected void onResume() {
         super.onResume();

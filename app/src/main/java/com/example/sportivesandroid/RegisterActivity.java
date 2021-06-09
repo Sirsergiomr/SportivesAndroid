@@ -27,7 +27,13 @@ import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * Activity to register a new user.
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_password, et_new_password,et_email , et_name;
     private Button bt_registrarse;

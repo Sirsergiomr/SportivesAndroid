@@ -31,7 +31,13 @@ import java.util.TimerTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+/**
+ * Activity to time user activity
+ *
+ * @author Sergio Muñoz Ruiz
+ * @version 2021.0606
+ * @since 30.0
+ */
 public class TemporizadorActivity extends AppCompatActivity {
     private String name = " ";
     private String id_maquina = null;
